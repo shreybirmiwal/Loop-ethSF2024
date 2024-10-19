@@ -15,6 +15,9 @@ function Home() {
         navigate(`/model/${modelName}`);
     };
 
+    //insert a use effect that calls a smart contract read function that gets all avaible projects
+    //use that data to be displayed
+
     return (
         <div className="p-8">
             {/* Hero Section */}

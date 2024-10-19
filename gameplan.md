@@ -1,6 +1,7 @@
 feedback for walrus:
 make it clear u dont need cli - i wasted a long time on that
 ability to to update the data 
+documentaiton on curling + using their api from other languages
 
 
 **Active:**

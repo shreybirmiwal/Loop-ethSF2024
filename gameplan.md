@@ -1,3 +1,8 @@
+feedback for walrus:
+make it clear u dont need cli - i wasted a long time on that
+ability to to update the data 
+
+
 **Active:**
 
 Polygon: Best AI + Onchain App on Polygon ⸺ $5,000 ($2,000 x 1, $1,000 x 3)

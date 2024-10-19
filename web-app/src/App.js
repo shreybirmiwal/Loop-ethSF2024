@@ -16,7 +16,7 @@ function App() {
           {/* Logo on Left */}
           <div className="flex items-center">
             <img src="[LOGO_IMAGE_URL]" alt="Logo" className="h-8 w-8 mr-2" /> {/* Replace with your logo image */}
-            <h1 className="text-2xl font-semibold text-indigo-600">[name]</h1> {/* Insert your brand name */}
+            <h1 className="text-2xl font-semibold text-indigo-600">Flex</h1> {/* Insert your brand name */}
           </div>
 
           {/* Links in Middle with Space Between */}

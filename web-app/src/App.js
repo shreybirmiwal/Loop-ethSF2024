@@ -1,10 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
+import { usePrivy } from '@privy-io/react-auth';
 import Home from './pages/Home';
 import UploadModel from './pages/UploadModel';
 import ModelPage from './pages/ModelPage';
 
 function App() {
+  const { authenticated } = usePrivy();
+
   return (
     <Router>
       <div className="min-h-screen bg-white text-gray-800">
@@ -19,11 +22,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<UploadModel />} />
-          <Route path="/model/:modelName" element={<ModelPage />} />
-        </Routes>
+          <Route
+            path="/model/:modelName"
+            element={authenticated ? <ModelPage /> : <Navigate to="/login" />}
+          />        </Routes>
       </div>
     </Router>
   );
 }
 
 export default App;
+

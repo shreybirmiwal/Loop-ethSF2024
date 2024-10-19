@@ -1,7 +1,11 @@
+#BASE URL: https://shreybirmiwal.pythonanywhere.com/
+
 from flask import Flask
+from flask_cors import CORS  # Import CORS
+from flask import jsonify
 
 app = Flask(__name__)
-
+CORS(app)
 
 # @app.route('/')
 # def hello():
@@ -10,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/api/hello')
 def hello_api():
-    return {'hello': 'world'}
+    return jsonify({'hello': 'world'})
 
 
 # 1) quereying these models and getting the answers frm the model
@@ -20,7 +24,7 @@ def hello_api():
 @app.route('/api/inference/<model>/<prompt>')
 def inference(model, prompt):
     # query the model and get the output
-    return {'model': model, 'prompt': prompt, 'output': (f'OUTPUT OUTPOUT OUTPUT HEHE +'+model+"SAD"+prompt)}
+    return jsonify({'model': model, 'prompt': prompt, 'output': (f'OUTPUT OUTPOUT OUTPUT HEHE +'+model+"SAD"+prompt)})
 
 
 # 2) updating RLHF given human feedback
@@ -29,7 +33,7 @@ def inference(model, prompt):
 @app.route('/api/feedback/<usefulness>/<clarity>/<relevance>')
 def feedback(usefulness, clarity, relevance):
     # update the model weights
-    return {'usefulness': usefulness, 'clarity': clarity, 'relevance': relevance, 'output': 'new model weights'}
+    return jsonify({'usefulness': usefulness, 'clarity': clarity, 'relevance': relevance, 'output': 'new model weights'})
 
 
 

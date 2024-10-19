@@ -1,0 +1,553 @@
+sreethereum
+sreethereum
+Do Not Disturb
+iPad <--> PC
+
+sreethereum — 06/04/2024 11:14 AM
+One of the biggest hurdles we encountered was integrating with the APIs of popular payment platforms like Venmo, Cash App, and Zelle via Chainlink's Any API service. Our team had no prior experience with this service, thereby complicating the process.
+
+Interacting with these diverse APIs through Chainlink proved to be a complex endeavor. Each platform had its own unique API specifications, authentication mechanisms, and data formats, which we had to meticulously understand and accommodate.
+
+Consequently, unit testing for this integration service became a demanding task. We had to create comprehensive test cases that accurately simulated real-world scenarios, accounting for various edge cases and potential failure modes. Once we recognized how the interfacing worked on a granular level, we determined what parameters to test for in our Solidity unit tests.
+
+To overcome this challenge, we dedicated significant effort to thoroughly studying the documentation provided by Chainlink, Venmo, Cash App, and Zelle. We meticulously examined their API specifications, authentication protocols, and response formats, ensuring a deep understanding of how to seamlessly interface.
+
+Through persistent effort and extensive research, we gradually gained the necessary knowledge to successfully integrate with these APIs using Chainlink's on-chain API calling service. The process was challenging, but it ultimately strengthened our team's expertise in working with diverse APIs and leveraging decentralized oracle networks like Chainlink.
+sreethereum — 06/04/2024 9:01 PM
+https://www.pokernow.club/games/pglRlYqND-_R-UipaC5oqUbK7
+Poker Now - Poker with Friends
+Online poker with your friends! No download and no registration needed.
+Image
+sreethereum — 06/06/2024 1:28 PM
+Texas Card House, 11834 Harry Hines Blvd Suite 135, Dallas, TX 75234
+Shuffle 214, 11411 E NW Hwy #111, Dallas, TX 75218
+sreethereum — 06/06/2024 1:38 PM
+Texas Card House, 955 W John Carpenter Fwy #110, Irving, TX 75039
+sreethereum — 06/06/2024 3:48 PM
+https://boards.greenhouse.io/scrollio/jobs/4343077101
+Crypto Data Analyst
+Remote
+Image
+sreethereum — 06/06/2024 9:26 PM
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImY5YjZkY2Y1LTk0OTctNDkxZC04NzhhLTViZWM2ZWQ3ZmZlYSIsIm9yZ0lkIjoiMzk1Mzk0IiwidXNlcklkIjoiNDA2Mjk5IiwidHlwZUlkIjoiZGY0ZmVhMTMtMjBlMy00ZTBiLWIzYzUtMzE3MWJhZDNkOWE0IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MTc3MzQzMzIsImV4cCI6NDg3MzQ5NDMzMn0.hAgkdEitvWgPg5oAsRSW4JBOca8bFEBTlA5z0u6uvOs
+sreethereum — 06/07/2024 12:35 PM
+from moralis import evm_api
+from user_manager import user, whale
+
+api_key = "xyz"
+
+// Get whale's token balances for Ethereum
+params = {"address": whale, "exclude_spam": True, "chain": "eth"}
+result = evm_api.token.get_wallet_token_balances(api_key=api_key, params=params)
+print(result)
+
+
+// Get whale's token transfers for Ethereum
+params = {"chain": "eth", "order": "DESC", "address": whale}
+result = evm_api.token.get_wallet_token_transfers(api_key=api_key, params=params)
+print(result) 
+sreethereum — 06/09/2024 8:22 AM
+Image
+sreethereum — 06/10/2024 9:48 PM
+https://www.pokernow.club/games/pglr6b_HInAC-1Q04wZAmr64i
+Poker Now - Poker with Friends
+Online poker with your friends! No download and no registration needed.
+Image
+sreethereum — 06/18/2024 11:33 AM
+https://t.me/dittotradebot
+Telegram
+ditto
+whale copytrade bot for EVM
+sreethereum — 06/27/2024 6:14 PM
+Image
+Image
+Image
+Image
+Attachment file type: unknown
+B1_English_White.jpg
+17.53 MB
+sreethereum — 06/28/2024 11:09 AM
+gg
+Attachment file type: acrobat
+f37b4c6cba4f66ba91f45b89de371de83a1060ad.pdf
+16.41 MB
+sreethereum — 08/09/2024 2:16 PM
+Attachment file type: acrobat
+InteliusReport.pdf
+302.29 KB
+sreethereum — 08/20/2024 9:41 AM
+https://nam10.safelinks.protection.outlook.com/?url=https%3A%2F%2Faustincc.zoom.us%2Fw%2F81423172773%3Ftk%3D4bYdiIhDacDs_yHlAPyvIzD3a3gT9735VPaeX6c9T5g.DQcAAAAS9TMEpRZHbzF0YWtYdFRzMmQzeHN5Rk9jMlNBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%26pwd%3D9GSSc0HFcuaWhOyPQabw2RQHJZJJ79.1&data=05%7C02%7Csduggirala%40foundrydigital.com%7C0d28974696694c90144908dcc125123b%7C6681433fa30d43cd88818e964fa723ad%7C0%7C0%7C638597612193561722%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&sdata=Rh14InlGXP%2FkucttjvhefZ%2BGQ7RvGfhk1hPqnC1bQcM%3D&reserved=0
+Zoom Video
+Join our Cloud HD Video Meeting
+Zoom is the leader in modern enterprise video communications, with an easy, reliable cloud platform for video and audio conferencing, chat, and webinars across mobile, desktop, and room systems. Zoom Rooms is the original software-based conference room solution used around the world in board, conference, huddle, and training rooms, as well as ex...
+sreethereum — 08/23/2024 8:55 PM
+Image
+sreethereum — 08/23/2024 9:32 PM
+Image
+sreethereum — 08/30/2024 3:48 PM
+Documents from Coinbase Card, BofA debit, BofA credit, W2 forms, and Robinhood for taxes
+Reorder nutri bullet
+Reorder replacement blue lights for bug zappers
+sreethereum — 08/31/2024 8:16 PM
+https://www.facebook.com/treasurevalleysigns/videos/graphic-designer-my-dream-job/396978551352661/
+Graphic designer; my dream job | "save him as a PDF" hahaha 😂 | By ...
+"save him as a PDF" hahaha 😂
+sreethereum — 09/01/2024 12:51 AM
+Image
+sreethereum — 09/09/2024 11:51 AM
+Image
+anna@dcg.co
+sreethereum — 09/16/2024 2:32 AM
+Attachment file type: acrobat
+HW_1__F-24_.pdf
+133.17 KB
+sreethereum
+ started a call that lasted a few seconds.
+ — 09/16/2024 6:01 AM
+sreethereum — 09/16/2024 3:49 PM
+Image
+sreethereum — 09/17/2024 8:20 AM
+Attachment file type: acrobat
+ECE Report Cover_MK.pdf
+193.53 KB
+sreethereum — 09/19/2024 1:18 PM
+'
+Attachment file type: acrobat
+SMART Housing_Income_Verification_Forms RENEWAL.pdf
+566.74 KB
+sreethereum — 09/19/2024 3:11 PM
+Attachment file type: acrobat
+Exam 1.pdf
+1.78 MB
+sreethereum — 09/22/2024 1:49 PM
+0x4AB3fcC9C755Fc29E221B5d857E78272A08D6c78
+sreethereum — 09/23/2024 11:00 AM
+Attachment file type: acrobat
+HW 2 F-24.pdf
+153.14 KB
+sreethereum — 09/24/2024 2:15 AM
+Image
+sreethereum — 09/25/2024 12:40 AM
+// lab 3
+
+// Dump.c
+// Your solution to ECE319K Lab 3 Spring 2024
+// Author: Sree Duggirala
+// Last Modified: Your date
+Expand
+lab 3.txt
+6 KB
+sreethereum — 09/26/2024 9:08 PM
+Attachment file type: acrobat
+Lab+2+%28RC+and+RL+Circuits%29.pdf
+2.04 MB
+sreethereum
+ started a call that lasted a few seconds.
+ — 09/27/2024 8:19 AM
+sreethereum — 09/27/2024 7:21 PM
+Image
+Image
+Image
+sreethereum — 09/27/2024 7:29 PM
+Image
+sreethereum — 10/11/2024 8:44 PM
+Image
+sreethereum — 10/11/2024 8:55 PM
+Image
+Image
+sreethereum — 10/11/2024 9:06 PM
+Image
+sreethereum — 10/11/2024 10:30 PM
+Image
+sreethereum — 10/14/2024 8:27 AM
+Image
+Image
+sreethereum — 10/14/2024 9:00 AM
+Subnet Name: BittAudio – DEREGISTERED
+
+Net UID: 50
+
+Objective: Text-to-Music
+
+Evaluation Criteria: Relevance, sound quality, 
+
+Exploit: No inbuilt plagiarism detection mechanism for outputs (prompts are generated by Corcel).
+
+Miners can search YouTube, streaming platforms, etc., for relevant content, convert that to audio format, and submit to validators. No AI computation required.
+
+Difficulty: Simple
+
+Community Perception: Negative, unoriginal content
+sreethereum — 10/17/2024 12:20 PM
+import chromadb
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from openai import OpenAI
+
+
+class ChromaInterface:
+    def __init__(self):
+        pass
+
+    def create_chunks(self) -> list:
+
+        # Create chunks from PDF
+        file_path = "docs/morpheus-whitepaper.pdf"
+
+        loader = PyPDFLoader(file_path)
+        document = loader.load()
+
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=200, chunk_overlap=100
+        )
+        chunks = text_splitter.split_documents(document)
+
+        print(f"{len(chunks)} chunks were created.\n")
+
+        return chunks
+
+    def upsert_chunks(self) -> None:
+        """Stores document chunks on Chroma.
+
+        Args:
+            chunks (list): List of dictionaries, each representing a document chunk from Morpheus' docs.
+        """
+        chunks = self.create_chunks()
+
+        chroma_client = chromadb.Client()
+
+        collection = chroma_client.get_or_create_collection(name="morpheus-chatbot")
+        collection.upsert(
+            documents=[chunks[i].page_content for i in range(len(chunks))],
+            ids=[f"{i}" for i in range(len(chunks))],
+        )
+
+        print(f"{len(chunks)} documents were stored on Chroma.\n")
+
+    def query(self, query: str) -> list:
+        """Queries Chroma for documents that match the given query.
+
+        Args:
+            query (str): The query/question to search for.
+
+        Returns:
+            list: List of dictionaries, each representing a document chunk that matches the query.
+        """
+        chroma_client = chromadb.Client()
+
+        collection = chroma_client.get_or_create_collection(name="morpheus-chatbot")
+
+        results = collection.query(query_texts=[query], n_results=1)
+
+        return results
+# Use a pipeline as a high-level helper
+from chroma import ChromaInterface
+from dotenv import load_dotenv
+from openai import OpenAI
+import os
+
+
+class Chatbot:
+    def __init__(self):
+        load_dotenv()
+        self.OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+        self.chroma = ChromaInterface()
+        self.chroma.upsert_chunks()
+
+    def chat(self, query: str) -> str:
+        client = OpenAI(api_key=self.OPENAI_API_KEY)
+
+        results = self.chroma.query(query)
+
+        system_prompt = f"""
+        You are a helpful assistant who answers questions based on Morpheus AI's documentation. You only answer based on knowledge contained in the documentation and do not provide personal opinions.
+        
+        If you don't know the answer, you can say "I don't know."
+        
+        You are given the documentation: {str(results['documents'])}
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": query},
+            ],
+        )
+
+        return response.choices[0].message.content
+
+
+chatbot = Chatbot()
+query = input("Ask the Morpheus chatbot a question!\n")
+response = chatbot.chat(query)
+print(response)
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+... (62 lines left)
+Collapse
+message.txt
+4 KB
+sreethereum — 10/17/2024 11:57 PM
+Image
+﻿
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+.pdm.toml
+.pdm-python
+.pdm-build/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/

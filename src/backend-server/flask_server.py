@@ -8,7 +8,6 @@ app = Flask(__name__)
 #     return 'Hello, World!'
 
 
-
 @app.route('/api/hello')
 def hello_api():
     return {'hello': 'world'}
@@ -21,7 +20,7 @@ def hello_api():
 @app.route('/api/inference/<model>/<prompt>')
 def inference(model, prompt):
     # query the model and get the output
-    return {'model': model, 'prompt': prompt, 'output': f('OUTPUT OUTPOUT OUTPUT HEHE +'+model+"SAD"+prompt)}
+    return {'model': model, 'prompt': prompt, 'output': (f'OUTPUT OUTPOUT OUTPUT HEHE +'+model+"SAD"+prompt)}
 
 
 # 2) updating RLHF given human feedback

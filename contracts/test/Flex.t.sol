@@ -58,7 +58,7 @@ contract FlexTest is Test {
         flex.createProject(
             "Project 1",
             "Description 1",
-            1 ether,
+            10 ** 18,
             "https://walrus.com/1"
         );
         flex.deposit{value: 500 ether}(0);

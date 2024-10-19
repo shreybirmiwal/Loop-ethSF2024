@@ -2,22 +2,24 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import UploadModel from './pages/UploadModel';
+import ModelPage from './pages/ModelPage';
 
 function App() {
   return (
     <Router>
-      <div className="bg-gray-900 text-white min-h-screen">
-        <nav className="p-6 bg-gray-800 flex justify-between">
-          <h1 className="text-xl font-bold">RLHF Crypto</h1>
-          <div className="space-x-4">
-            <Link to="/" className="hover:text-gray-400">Home</Link>
-            <Link to="/upload" className="hover:text-gray-400">Upload Model</Link>
+      <div className="min-h-screen bg-white text-gray-800">
+        <nav className="p-6 border-b border-gray-300 flex justify-between items-center">
+          <h1 className="text-2xl font-semibold text-indigo-600">RLHF Crypto</h1>
+          <div className="space-x-6">
+            <Link to="/" className="text-lg hover:text-indigo-500">Home</Link>
+            <Link to="/upload" className="text-lg hover:text-indigo-500">Upload Model</Link>
           </div>
         </nav>
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<UploadModel />} />
+          <Route path="/model/:modelName" element={<ModelPage />} />
         </Routes>
       </div>
     </Router>

@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiSend } from 'react-icons/fi';
 import { usePrivy } from '@privy-io/react-auth'; // Import Privy
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function ModelPage() {
-    const { authenticated, login } = usePrivy(); // Access authentication and login methods
-
+    const { authenticated, login } = usePrivy(); // Access authentication and login methods    
     const { modelName } = useParams();
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
@@ -23,7 +25,17 @@ function ModelPage() {
 
     const handleSendMessage = () => {
         if (!authenticated) {
-            alert('Please log in to send messages.');
+            toast.error('Must be logged in!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
             return;
         }
         if (!inputMessage.trim()) return;
@@ -40,7 +52,17 @@ function ModelPage() {
 
     const handleSubmitFeedback = () => {
         console.log('Feedback submitted:', feedback);
-        alert('Feedback submitted successfully!');
+
+        toast.success('Feedback submitted. USDC deposit en-route', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
 
     return (
@@ -152,6 +174,18 @@ function ModelPage() {
                     Submit Feedback
                 </button>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }

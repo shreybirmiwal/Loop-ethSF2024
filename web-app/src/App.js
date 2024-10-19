@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import Home from './pages/Home';
 import UploadModel from './pages/UploadModel';
 import ModelPage from './pages/ModelPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const { authenticated } = usePrivy();
@@ -25,7 +26,11 @@ function App() {
           <Route
             path="/model/:modelName"
             element={authenticated ? <ModelPage /> : <Navigate to="/login" />}
-          />        </Routes>
+          />
+
+          <Route path="/login" element={<LoginPage />} />
+
+        </Routes>
       </div>
     </Router>
   );

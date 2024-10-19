@@ -1,22 +1,34 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { contract_abi } from '../contract_abi.json'
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
 
-const models = [
-    { name: 'GPT-3', description: 'Advanced text generation' },
-    { name: 'Stable Diffusion', description: 'AI-powered image generation' },
-    { name: 'BERT', description: 'NLP tasks like Q&A' },
-    { name: 'DALL-E', description: 'Art generation using AI' },
-];
 
 function Home() {
+    const contract_address = "0xba30D3b9F488554696814F19C5Be18e7668E67e3";
     const navigate = useNavigate();
+    const [projects, setProjects] = useState([]);
 
-    const handleModelClick = (modelName) => {
-        navigate(`/model/${modelName}`);
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+
+    const fetchProjects = async () => {
+
+
+
+        setProjects([
+            { name: 'GPT-3', description: 'Advanced text generation' },
+            { name: 'Stable Diffusion', description: 'AI-powered image generation' },
+            { name: 'BERT', description: 'NLP tasks like Q&A' },
+            { name: 'DALL-E', description: 'Art generation using AI' },
+        ]);
     };
 
-    //insert a use effect that calls a smart contract read function that gets all avaible projects
-    //use that data to be displayed
+    const handleProjectClick = (projectId) => {
+        navigate(`/project/${projectId}`);
+    };
 
     return (
         <div className="p-8">
@@ -30,16 +42,18 @@ function Home() {
 
             {/* Model List Section */}
             <section>
-                <h2 className="text-3xl font-bold mb-6 ">Available Models</h2>
+                <h2 className="text-3xl font-bold mb-6">Available Projects</h2>
                 <div className="space-y-4">
-                    {models.map((model, index) => (
+                    {projects.map((project) => (
                         <div
-                            key={index}
+                            key={project.id}
                             className="p-6 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer"
-                            onClick={() => handleModelClick(model.name)}
+                            onClick={() => handleProjectClick(project.id)}
                         >
-                            <h3 className="text-xl font-semibold text-indigo-600 mb-2">{model.name}</h3>
-                            <p className="text-gray-600">{model.description}</p>
+                            <h3 className="text-xl font-semibold text-indigo-600 mb-2">{project.title}</h3>
+                            <p className="text-gray-600 mb-2">{project.description}</p>
+                            <p className="text-sm text-gray-500">Bounty: {project.bounty} ETH</p>
+                            <p className="text-sm text-gray-500">Bounty Pool: {project.bountyPool} ETH</p>
                         </div>
                     ))}
                 </div>
@@ -49,3 +63,4 @@ function Home() {
 }
 
 export default Home;
+

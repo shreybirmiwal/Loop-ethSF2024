@@ -19,12 +19,13 @@ contract Flex {
         uint256 _bounty,
         string memory _walrusLink
     ) public {
+        uint256 _refactoredBounty = _bounty * 1 ether;
         // create a new project
         Project memory project = Project(
             projects.length,
             _title,
             _description,
-            _bounty,
+            _refactoredBounty,
             0,
             _walrusLink
         );

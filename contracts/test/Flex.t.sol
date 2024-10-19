@@ -37,7 +37,7 @@ contract FlexTest is Test {
 
         Flex.Project[] memory projects = flex.getProjects();
         assertEq(projects.length, 3);
-        assertEq(projects[0].bounty, 1);
+        assertEq(projects[0].bounty, 1 ether);
     }
 
     function testDeposit() public {
@@ -58,7 +58,7 @@ contract FlexTest is Test {
         flex.createProject(
             "Project 1",
             "Description 1",
-            10 ** 18,
+            1,
             "https://walrus.com/1"
         );
         flex.deposit{value: 500 ether}(0);

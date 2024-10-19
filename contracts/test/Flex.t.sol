@@ -67,7 +67,7 @@ contract FlexTest is Test {
         assertEq(project.bountyPool, 499 ether);
     }
 
-    function testUpdateWalrusLink() public {
+    function testUpdateFeedbackURI() public {
         vm.startPrank(dev);
         flex.createProject(
             "Project 1",
@@ -75,8 +75,8 @@ contract FlexTest is Test {
             1,
             "https://walrus.com/1"
         );
-        flex.updateWalrusLink(0, "https://walrus.com/updated");
+        flex.updateFeedbackURI(0, "https://walrus.com/updated");
         Flex.Project memory project = flex.getProject(0);
-        assertEq(project.walrusLink, "https://walrus.com/updated");
+        assertEq(project.feedbackURI, "https://walrus.com/updated");
     }
 }

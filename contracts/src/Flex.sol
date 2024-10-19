@@ -8,7 +8,7 @@ contract Flex {
         string description;
         uint256 bounty;
         uint256 bountyPool;
-        string walrusLink;
+        string feedbackURI;
     }
 
     Project[] public projects;
@@ -17,7 +17,7 @@ contract Flex {
         string memory _title,
         string memory _description,
         uint256 _bounty,
-        string memory _walrusLink
+        string memory _feedbackURI
     ) public {
         uint256 _refactoredBounty = _bounty * 1 ether;
         // create a new project
@@ -27,7 +27,7 @@ contract Flex {
             _description,
             _refactoredBounty,
             0,
-            _walrusLink
+            _feedbackURI
         );
         projects.push(project);
     }
@@ -46,18 +46,18 @@ contract Flex {
         }
     }
 
-    function updateWalrusLink(
+    function updateFeedbackURI(
         uint256 _projectId,
-        string memory _walrusLink
+        string memory _feedbackURI
     ) public {
         // update project walrus link
-        projects[_projectId].walrusLink = _walrusLink;
+        projects[_projectId].feedbackURI = _feedbackURI;
     }
 
-    function getWalrusLink(
+    function getfeedbackURI(
         uint256 _projectId
     ) public view returns (string memory) {
-        return projects[_projectId].walrusLink;
+        return projects[_projectId].feedbackURI;
     }
 
     function getProjects() public view returns (Project[] memory) {

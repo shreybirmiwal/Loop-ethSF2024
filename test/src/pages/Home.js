@@ -1,14 +1,14 @@
 import React from 'react';
+import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
-//import { abi } from './abi.js'
+// import { abi } from './abi.js'
 import { useEffect, useState } from 'react';
 
 
 
 function Home() {
-    //const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_ID');
-    //const contractCode = new web3.eth.Contract(abi, "0xba30D3b9F488554696814F19C5Be18e7668E67e3");
-
+    // const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_ID');
+    // const contractCode = new web3.eth.Contract(abi, "0xba30D3b9F488554696814F19C5Be18e7668E67e3");
 
 
 

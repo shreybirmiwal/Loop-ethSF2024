@@ -1,12 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { contract_abi } from '../contract_abi.json'
-import { ethers } from 'ethers';
+import { Web3 } from 'web3';
 import { useEffect, useState } from 'react';
 
 
 function Home() {
-    const contract_address = "0xba30D3b9F488554696814F19C5Be18e7668E67e3";
+    const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_ID');
+    const conntractCode = new web3.eth.Contract(contract_abi, "0xba30D3b9F488554696814F19C5Be18e7668E67e3");
+
+
+
+
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
 

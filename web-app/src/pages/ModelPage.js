@@ -8,6 +8,8 @@ const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server
 
 function ModelPage() {
     const { modelName } = useParams();
+
+
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const [feedback, setFeedback] = useState('');
@@ -22,7 +24,6 @@ function ModelPage() {
         if (!inputMessage.trim()) return;
 
         try {
-            // Simulate fetching AI response from Flask server
             const response = await fetch(`${API_BASE_URL}/api/inference/${modelName}/${inputMessage}`, {
                 headers: { 'Content-Type': 'application/json' },
             });
@@ -36,7 +37,7 @@ function ModelPage() {
                 { sender: 'ai', text: data.output },
             ]);
             setInputMessage('');
-            setFeedbackPending(true); // Set feedback as pending after response
+            setFeedbackPending(true);
         } catch (error) {
             console.error('Error fetching AI response:', error);
             toast.error('Failed to get response from model!', { position: 'top-right', theme: 'light' });
@@ -46,6 +47,15 @@ function ModelPage() {
     const handleFeedbackSelection = (selectedFeedback) => {
         setFeedback(selectedFeedback);
         toast.success(`Feedback submitted: ${selectedFeedback}`, { position: 'top-right', theme: 'light' });
+
+        //send feedback to server
+        console.log("SEND THIS STUFF TO THE WALRUS DB")
+        console.log('Feedback:', selectedFeedback);
+        console.log('query:', chatMessages[chatMessages.length - 2].text);
+        console.log('response:', chatMessages[chatMessages.length - 1].text);
+        console.log("GIVE USER THE MONEY")
+
+
         setFeedbackPending(false);
     };
 

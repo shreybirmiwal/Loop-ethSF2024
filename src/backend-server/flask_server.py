@@ -30,10 +30,15 @@ def inference(model, prompt):
 # 2) updating RLHF given human feedback
 # input: human feedback (Usefulness, Clarity Relevance) all frm - (0->10)
 # output: new model weights
-@app.route('/api/feedback/<usefulness>/<clarity>/<relevance>')
-def feedback(usefulness, clarity, relevance):
+@app.route('/api/feedback/<model>/<prompt>/<response>/<feedback>')
+def feedback(model, prompt, response, feedback):
     # update the model weights
-    return jsonify({'usefulness': usefulness, 'clarity': clarity, 'relevance': relevance, 'output': 'new model weights'})
+
+    #update firebase
+    
+
+
+    return jsonify({model: model, prompt: prompt, response: response, feedback: feedback})
 
 
 

@@ -7,7 +7,11 @@ function ModelPage() {
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const navigate = useNavigate(); // To handle redirection
-
+    const [feedback, setFeedback] = useState({
+        usefulness: null,
+        clarity: null,
+        relevance: null,
+    });
     const chatEndRef = useRef(null);
 
     useEffect(() => {
@@ -21,6 +25,15 @@ function ModelPage() {
 
         setChatMessages([...chatMessages, { sender: 'user', text: inputMessage }, { sender: 'ai', text: aiResponse }]);
         setInputMessage('');
+    };
+
+    const handleFeedbackChange = (metric, value) => {
+        setFeedback({ ...feedback, [metric]: value });
+    };
+
+    const handleSubmitFeedback = () => {
+        console.log('Feedback submitted:', feedback);
+        alert('Feedback submitted successfully!');
     };
 
     return (
@@ -65,7 +78,58 @@ function ModelPage() {
                     </button>
                 </div>
             </div>
-        </div>
+
+
+            {/* Right: Feedback Section (25%) */}
+            <div className="w-1/4 p-8 bg-white border-l border-gray-300 flex flex-col">
+                <h3 className="text-2xl font-bold text-indigo-600 mb-4">Feedback</h3>
+
+                <div className="space-y-6 flex-grow">
+                    <div>
+                        <label className="text-gray-700 block mb-2">Usefulness</label>
+                        <input
+                            type="range"
+                            min="0"
+                            max="10"
+                            value={feedback.usefulness ?? ''}
+                            onChange={(e) => handleFeedbackChange('usefulness', parseInt(e.target.value))}
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-gray-700 block mb-2">Clarity</label>
+                        <input
+                            type="range"
+                            min="0"
+                            max="10"
+                            value={feedback.clarity ?? ''}
+                            onChange={(e) => handleFeedbackChange('clarity', parseInt(e.target.value))}
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-gray-700 block mb-2">Relevance</label>
+                        <input
+                            type="range"
+                            min="0"
+                            max="10"
+                            value={feedback.relevance ?? ''}
+                            onChange={(e) => handleFeedbackChange('relevance', parseInt(e.target.value))}
+                            className="w-full"
+                        />
+                    </div>
+                </div>
+
+                <button
+                    onClick={handleSubmitFeedback}
+                    className="w-full bg-indigo-500 text-white py-3 rounded-lg hover:bg-indigo-600 mt-8"
+                >
+                    Submit Feedback
+                </button>
+            </div>
+        </div >
     );
 }
 

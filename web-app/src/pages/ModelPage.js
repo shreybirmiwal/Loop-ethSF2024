@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiSend } from 'react-icons/fi';
+import { usePrivy } from '@privy-io/react-auth'; // Import Privy
 
 function ModelPage() {
+    const { authenticated, login } = usePrivy(); // Access authentication and login methods
+
     const { modelName } = useParams();
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
@@ -19,6 +22,10 @@ function ModelPage() {
     }, [chatMessages]);
 
     const handleSendMessage = () => {
+        if (!authenticated) {
+            alert('Please log in to send messages.');
+            return;
+        }
         if (!inputMessage.trim()) return;
 
         const aiResponse = `"${inputMessage.split('').reverse().join('')}"`;
@@ -46,7 +53,17 @@ function ModelPage() {
 
                 <div className="flex-grow bg-white border rounded-lg shadow-md p-6 overflow-y-auto">
                     {chatMessages.length === 0 ? (
-                        <p className="text-gray-400 text-center">No messages yet. Start chatting below!</p>
+                        authenticated ? (
+                            <p className="text-gray-400 text-center">No messages yet. Start chatting below!</p>
+                        ) : (
+                            <p className="text-gray-400 text-center">
+                                Please{' '}
+                                <button onClick={login} className="text-indigo-500">
+                                    log in
+                                </button>{' '}
+                                to start chatting.
+                            </p>
+                        )
                     ) : (
                         chatMessages.map((msg, index) => (
                             <div
@@ -54,7 +71,9 @@ function ModelPage() {
                                 className={`mb-4 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                             >
                                 <div
-                                    className={`p-4 rounded-lg shadow-md max-w-xs ${msg.sender === 'user' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800'
+                                    className={`p-4 rounded-lg shadow-md max-w-xs ${msg.sender === 'user'
+                                        ? 'bg-indigo-500 text-white'
+                                        : 'bg-gray-200 text-gray-800'
                                         }`}
                                 >
                                     {msg.text}
@@ -72,13 +91,17 @@ function ModelPage() {
                         onChange={(e) => setInputMessage(e.target.value)}
                         placeholder="Type your message..."
                         className="flex-grow p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+                        disabled={!authenticated} // Disable input if not authenticated
                     />
-                    <button onClick={handleSendMessage} className="ml-4 p-3 bg-indigo-500 text-white rounded-full">
+                    <button
+                        onClick={handleSendMessage}
+                        className="ml-4 p-3 bg-indigo-500 text-white rounded-full"
+                        disabled={!authenticated} // Disable button if not authenticated
+                    >
                         <FiSend size={24} />
                     </button>
                 </div>
             </div>
-
 
             {/* Right: Feedback Section (25%) */}
             <div className="w-1/4 p-8 bg-white border-l border-gray-300 flex flex-col">
@@ -129,7 +152,7 @@ function ModelPage() {
                     Submit Feedback
                 </button>
             </div>
-        </div >
+        </div>
     );
 }
 

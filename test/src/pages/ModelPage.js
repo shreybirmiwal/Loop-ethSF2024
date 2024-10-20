@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { FiSend } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Web3 from 'web3';
+
+import { abi } from './abi.js'
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
@@ -15,6 +18,12 @@ function ModelPage() {
     const [feedback, setFeedback] = useState('');
     const [feedbackPending, setFeedbackPending] = useState(false);
     const chatEndRef = useRef(null);
+
+
+    //crypto stuff
+    const web3 = new Web3('https://rpc-amoy.polygon.technology/');
+    const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
+
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -70,7 +79,14 @@ function ModelPage() {
 
 
         setFeedbackPending(false);
+
+        handlePayments();
     };
+    //user needs to be payed out here
+
+    const handlePayments = () => {
+
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">

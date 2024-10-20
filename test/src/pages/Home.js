@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 
 
 function Home() {
-    const web3 = new Web3('https://polygon-amoy.infura.io/v3/21dacd2cd38d4327aea6c6a677249c8f');
-    const contractCode = new web3.eth.Contract(abi, "0xe9113ab129cE12cF7cc50A5D65cfA34FEC4746ed");
+    const web3 = new Web3('hhttps://rpc-amoy.polygon.technology/');
+    const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
 
 
 

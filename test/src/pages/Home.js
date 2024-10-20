@@ -1,5 +1,4 @@
 import React from 'react';
-import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
 import { abi } from './abi.js'
 import { useEffect, useState } from 'react';
@@ -7,8 +6,8 @@ import { useEffect, useState } from 'react';
 
 
 function Home() {
-    const web3 = new Web3('hhttps://rpc-amoy.polygon.technology/');
-    const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
+    // const web3 = new Web3('https://rpc-amoy.polygon.technology/');
+    // const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
 
 
 
@@ -17,7 +16,6 @@ function Home() {
 
     useEffect(() => {
         fetchProjects();
-
 
 
     }, []);

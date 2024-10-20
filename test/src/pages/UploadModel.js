@@ -26,33 +26,40 @@ function UploadModelPage() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
+        try {
+            console.log("Form submission started");
+            console.log({ title, description, hfLink, bounty });
 
-        // Handle submission logic here
-        console.log({ title, description, hfLink, bounty });
+            // IPFS upload
+            console.log("Starting IPFS upload");
+            const randomId = Math.floor(Math.random() * 1000000);
+            const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
 
-        //ipfs upload
-        //ranom numbre
-        const randomId = Math.floor(Math.random() * 1000000);
+            console.log("Uploading to Pinata");
+            const upload = await pinata.upload.file(blankFile);
+            const ipfsLink = upload.IpfsHash;
+            console.log(`IPFS Link: ${ipfsLink}`);
 
-        const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
-        const upload = await pinata.upload.file(blankFile);
-        const ipfsLink = upload.IpfsHash;
-        console.log(`IPFS Link: ${ipfsLink}`);
+            // Prepare the blockchain transaction
+            console.log("Preparing blockchain transaction");
+            const transaction = prepareContractCall({
+                contract,
+                method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
+                params: [title, description, bounty, ipfsLink]
+            });
+            console.log("Transaction prepared:", transaction);
 
+            // Send the transaction
+            console.log("Sending transaction");
+            const result = await sendTransaction(transaction);
+            console.log("Transaction result:", result);
 
-        // publish the model to the blockchain
-        const transaction = prepareContractCall({
-            contract,
-            method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-            params: [title, description, bounty, ipfsLink]
-        });
-        sendTransaction(transaction);
-
-        //console.log("/admin/" + nextProjectId + "/" + title);
-
-
-        toast.success('Model uploaded successfully!', { theme: 'light' });
-    };
+            toast.success('Model uploaded successfully!', { theme: 'light' });
+        } catch (error) {
+            console.error("Error in form submission:", error);
+            toast.error('Error uploading model: ' + error.message, { theme: 'light' });
+        }
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">

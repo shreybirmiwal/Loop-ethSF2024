@@ -44,9 +44,9 @@ function Home() {
         <div className="p-8">
             {/* Hero Section */}
             <section className="text-center py-16 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg mb-12">
-                <h1 className="text-5xl font-bold mb-6">Explore AI Models & Earn Crypto</h1>
+                <h1 className="text-5xl font-bold mb-6">Use AI. Give feedback. Earn Crypto</h1>
                 <p className="text-lg mx-auto">
-                    Use AI models for your tasks, improve them with feedback, and earn crypto rewards.
+                    On-chain decentralized reinforcement learning with feedback for AI finetuning.
                 </p>
             </section>
 

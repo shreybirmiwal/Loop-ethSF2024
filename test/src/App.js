@@ -18,8 +18,7 @@ function App() {
         <nav className="p-6 border-b border-gray-300 flex justify-between items-center">
 
           <div className="flex items-center">
-            <img src="[LOGO_IMAGE_URL]" alt="Logo" className="h-8 w-8 mr-2" />
-            <h1 className="text-2xl font-semibold text-indigo-600">Flex</h1>
+            <img src="./logo.png" alt="Logo" className="h-12 mr-2" />
           </div>
 
           <div className="flex items-center space-x-8">

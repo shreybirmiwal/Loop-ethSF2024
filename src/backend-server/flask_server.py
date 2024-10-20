@@ -64,7 +64,7 @@ def inference(model: int, prompt: str):
             print(message.choices[0].delta.content, end="")
 
 
-def inference_from_hf(model_name: str, prompt: str, url: str):
+def inference_from_hf(model_name: str, system_prompt: str, user_prompt: str, url: str):
     client = InferenceClient(api_key=os.getenv("HF_PAT"))
 
     for message in client.chat_completion(
@@ -72,7 +72,7 @@ def inference_from_hf(model_name: str, prompt: str, url: str):
         messages=[
             {
                 "role": "user",
-                "content": prompt,
+                "content": f"{system_prompt} + {user_prompt}",
             }
         ],
         max_tokens=500,

@@ -3,35 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { PrivyProvider } from '@privy-io/react-auth';
 
 
-//privvy key : cm2g6r3wm05kawu1zgh22jwfa
+
+import { ThirdwebProvider, ConnectButton } from "thirdweb/react";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
   <React.StrictMode>
-    <PrivyProvider
-      appId="cm2g6r3wm05kawu1zgh22jwfa"
-      config={{
-        // Display email and wallet as login methods
-        loginMethods: ['email', 'wallet'],
-        // Customize Privy's appearance in your app
-        appearance: {
-          theme: 'light',
-          accentColor: '#676FFF',
-          logo: 'https://your-logo-url',
-        },
-        // Create embedded wallets for users who don't have a wallet
-        embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
-        },
-      }}
-    >
+
+    <ThirdwebProvider>
       <App />
-    </PrivyProvider>
-  </React.StrictMode>,
+    </ThirdwebProvider>
+
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

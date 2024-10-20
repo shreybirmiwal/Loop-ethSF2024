@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
-import { usePrivy } from '@privy-io/react-auth';
 import Home from './pages/Home';
 import UploadModel from './pages/UploadModel';
 import ModelPage from './pages/ModelPage';
-import PrivyAuthButton from './pages/PrivyAuthButton';
+import { ConnectButton } from "thirdweb/react";
+import { createThirdwebClient } from "thirdweb";
+
+import { client } from './thirdwebInfra';
 
 function App() {
+
 
   return (
     <Router>
@@ -25,15 +28,16 @@ function App() {
 
 
           <div className="flex items-center justify-end">
-            <PrivyAuthButton className="ml-auto" />
+            <ConnectButton className="ml-auto" client={client} />
           </div>
+
         </nav>
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/upload" element={<UploadModel />} /> */}
+          <Route path="/upload" element={<UploadModel />} />
           <Route
-            path="/project/:modelName"
+            path="/project/:projectId/:projectTitle"
             element={<ModelPage />}
           />
 

@@ -13,8 +13,6 @@ const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server
 function ModelPage() {
     const { projectId, projectTitle } = useParams();
     const { mutate: sendTransaction } = useSendTransaction();
-
-
     const account = useActiveAccount();
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
 import Home from './pages/Home';
-// import UploadModel from './pages/UploadModel';
+import UploadModel from './pages/UploadModel';
 import ModelPage from './pages/ModelPage';
 import { ConnectButton } from "thirdweb/react";
 import { createThirdwebClient } from "thirdweb";
@@ -35,7 +35,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/upload" element={<UploadModel />} />  */}
+          <Route path="/upload" element={<UploadModel />} />
           <Route
             path="/project/:projectId/:projectTitle"
             element={<ModelPage />}

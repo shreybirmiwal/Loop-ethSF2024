@@ -22,7 +22,7 @@ function UploadModelPage() {
     const [hfLink, setHfLink] = useState('');
     const [bounty, setBounty] = useState('');
 
-
+    var title2;
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
@@ -50,7 +50,7 @@ function UploadModelPage() {
             //     method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
             //     params: []
             // })
-
+            title2 = title.replace(/ /g, "_");
 
 
             // Prepare the blockchain transaction
@@ -59,7 +59,7 @@ function UploadModelPage() {
                 contract,
                 method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
                 // params: [title, description, toWei(bounty), ipfsLink]
-                params: [title, description, toWei(bounty), "YEE"]
+                params: [title2, description, toWei(bounty), "YEE"]
 
             });
             console.log("Transaction prepared:", transaction);
@@ -90,7 +90,7 @@ function UploadModelPage() {
                     className="w-full max-w-2xl space-y-8 bg-white p-8 rounded-lg shadow-lg"
                 >
 
-                    <p> Once uploaded, check out your admin dashboard at: /project/$projectID/{title}</p>
+                    <p> Once uploaded, check out your admin dashboard at: /project/$projectID/{title2}</p>
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Model Title</label>

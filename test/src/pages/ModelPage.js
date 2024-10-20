@@ -9,12 +9,16 @@ import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 
 import { db } from '../firebase';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion, getDoc, setDoc } from 'firebase/firestore';
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
 function ModelPage() {
     const { projectId, projectTitle } = useParams();
+
+    var projectTitle2 = projectTitle.replace("_", "/");
+
+
     const { mutate: sendTransaction } = useSendTransaction();
     const account = useActiveAccount();
 
@@ -46,7 +50,7 @@ function ModelPage() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: projectId,
+                    model: projectTitle2,
                     query: inputMessage
                 })
             });
@@ -81,7 +85,7 @@ function ModelPage() {
 
         console.log('Query:', query);
         console.log('Response:', response);
-        console.log('Feedback:', selectedFeedback);  // Use the passed parameter
+        console.log('Feedback:', selectedFeedback); // Use the passed parameter
 
         try {
             // Reference the specific document in the 'data' collection
@@ -91,15 +95,26 @@ function ModelPage() {
             const newEntry = {
                 query,
                 response,
-                feedback: selectedFeedback,  // Use the passed parameter
+                feedback: selectedFeedback, // Use the passed parameter
+                timestamp: new Date().toISOString(), // Optional: add a timestamp
             };
 
-            // Append the new entry to the existing 'data' array using arrayUnion
-            await updateDoc(docRef, {
-                data: arrayUnion(newEntry),
-            });
+            // Check if the document exists
+            const docSnap = await getDoc(docRef);
 
-            console.log('New entry successfully added!');
+            if (docSnap.exists()) {
+                // Document exists, so update it with arrayUnion
+                await updateDoc(docRef, {
+                    data: arrayUnion(newEntry),
+                });
+                console.log('New entry successfully added!');
+            } else {
+                // Document doesn't exist, so create it with the new entry
+                await setDoc(docRef, {
+                    data: [newEntry], // Initialize with an array containing the new entry
+                }, { merge: true });
+                console.log('Document created and new entry added!');
+            }
         } catch (error) {
             console.error('Error appending data:', error);
         }
@@ -137,7 +152,7 @@ function ModelPage() {
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-800">{projectTitle}</h2>
+                <h2 className="text-xl font-semibold text-gray-800">{projectTitle2}</h2>
             </div>
 
             { }

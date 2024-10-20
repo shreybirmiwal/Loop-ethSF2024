@@ -62,8 +62,7 @@ function Home() {
                         >
                             <h3 className="text-xl font-semibold text-indigo-600 mb-2">{project.title}</h3>
                             <p className="text-gray-600 mb-2">{project.description}</p>
-                            <p className="text-sm text-gray-500">Bounty: {project.bounty} ETH</p>
-                            <p className="text-sm text-gray-500">Bounty Pool: {project.bountyPool} ETH</p>
+
                         </div>
                     ))}
                 </div>

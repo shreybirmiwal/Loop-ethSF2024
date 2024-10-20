@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { pinata } from '../utils/config';
+
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 import { client, contract, abi } from '../thirdwebInfra';
 import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
+import { readContract } from 'thirdweb';
 
 function UploadModelPage() {
     const navigate = useNavigate(); // Navigation for redirect
@@ -21,26 +23,41 @@ function UploadModelPage() {
     const [bounty, setBounty] = useState('');
 
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
 
         // Handle submission logic here
         console.log({ title, description, hfLink, bounty });
 
+        //ipfs upload
+        //get all projects
+        const projects = await readContract({
+            contract,
+            method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+            params: []
+        })
 
-        //generate ipfs link
 
+        //next project id = project length current
+        const nextProjectId = projects.length;
+        const blankFile = new File([""], `${nextProjectId}.txt`, { type: "text/plain" });
+        const upload = await pinata.upload.file(blankFile);
+        const ipfsLink = upload.IpfsHash;
+        console.log(`IPFS Link: ${ipfsLink}`);
 
 
         // publish the model to the blockchain
         const transaction = prepareContractCall({
             contract,
             method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-            params: [title, description, bounty, "randomuriTEST"]
+            params: [title, description, bounty, ipfsLink]
         });
         sendTransaction(transaction);
 
+
+        //once transacted, redirect to the admin page
+        navigate('/admin/' + nextProjectId + '/' + title);
 
 
         toast.success('Model uploaded successfully!', { theme: 'light' });

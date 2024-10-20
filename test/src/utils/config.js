@@ -1,6 +1,6 @@
 import { PinataSDK } from "pinata-web3"
 
 export const pinata = new PinataSDK({
-    pinataJwt: `${import.meta.env.VITE_PINATA_JWT}`,
-    pinataGateway: `${import.meta.env.VITE_GATEWAY_URL}`
+    pinataJwt: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4Yzg3MzVmZC0zYzk3LTQ4NzAtYmI5Yi1jOTBhMjgzMWIzNWYiLCJlbWFpbCI6InNocmV5YmlybWl3YWxAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6ImZiOWM5N2ZiNGI3ZmU5OGI3ODEwIiwic2NvcGVkS2V5U2VjcmV0IjoiN2JiYWMxYzExM2ViZTM5ZmU5NmM3ZThjZTZiNTM3ZDYxZDJjNGQ4MjQ0NWVmNWRmYmY1NDllZGJmNTJhNDVkZCIsImV4cCI6MTc2MDkzMzg2OH0.3DqvwgtTnFUBSpLuAWbs-yz-IrM0ysnuLSEk53OGrUM`,
+    pinataGateway: `maroon-imperial-ocelot-947.mypinata.cloud`
 })

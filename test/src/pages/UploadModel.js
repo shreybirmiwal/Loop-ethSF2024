@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { pinata } from '../utils/config';
+
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 import { client, contract, abi } from '../thirdwebInfra';
 import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
+import { readContract } from 'thirdweb';
 
 function UploadModelPage() {
     const navigate = useNavigate(); // Navigation for redirect
@@ -21,30 +23,35 @@ function UploadModelPage() {
     const [bounty, setBounty] = useState('');
 
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
 
         // Handle submission logic here
         console.log({ title, description, hfLink, bounty });
 
+        //ipfs upload
+        //ranom numbre
+        const randomId = Math.floor(Math.random() * 1000000);
 
-        //generate ipfs link
-
+        const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
+        const upload = await pinata.upload.file(blankFile);
+        const ipfsLink = upload.IpfsHash;
+        console.log(`IPFS Link: ${ipfsLink}`);
 
 
         // publish the model to the blockchain
         const transaction = prepareContractCall({
             contract,
             method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-            params: [title, description, bounty, "randomuriTEST"]
+            params: [title, description, bounty, ipfsLink]
         });
         sendTransaction(transaction);
 
+        //console.log("/admin/" + nextProjectId + "/" + title);
 
 
         toast.success('Model uploaded successfully!', { theme: 'light' });
-        navigate('/models'); // Redirect after success
     };
 
     return (

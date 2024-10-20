@@ -89,6 +89,7 @@ function ModelPage() {
     //user needs to be payed out here
 
     const handlePayments = async () => {
+        console.log("handle payments here ...")
         const transaction = prepareContractCall({
             contract,
             method: "function reward(address _recipient, uint256 _projectId)",

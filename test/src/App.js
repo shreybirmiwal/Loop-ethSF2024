@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
 import { usePrivy } from '@privy-io/react-auth';
 import Home from './pages/Home';
-// import UploadModel from './pages/UploadModel';
-// import ModelPage from './pages/ModelPage';
-// import LoginPage from './pages/LoginPage';
+import UploadModel from './pages/UploadModel';
+import ModelPage from './pages/ModelPage';
 import PrivyAuthButton from './pages/PrivyAuthButton';
 
 function App() {
@@ -32,11 +31,11 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/upload" element={<UploadModel />} /> */}
-          {/* <Route
-            path="/model/:modelName"
+          <Route path="/upload" element={<UploadModel />} /> */}
+          <Route
+            path="/project/:modelName"
             element={<ModelPage />}
-          /> */}
+          />
 
 
         </Routes>

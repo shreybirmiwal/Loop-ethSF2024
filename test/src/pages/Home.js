@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 
 function Home() {
-    const web3 = new Web3('https://mainnet.infura.io/v3/21dacd2cd38d4327aea6c6a677249c8f');
+    const web3 = new Web3('https://polygon-amoy.infura.io/v3/21dacd2cd38d4327aea6c6a677249c8f');
     const contractCode = new web3.eth.Contract(abi, "0xe9113ab129cE12cF7cc50A5D65cfA34FEC4746ed");
 
 
@@ -26,16 +26,11 @@ function Home() {
 
 
         const projects = await contractCode.methods.getProjects().call();
-        console.log('Uniswap symbol:', projects);
 
-        //call 
+        setProjects(projects);
 
-        setProjects([
-            { name: 'GPT-3', description: 'Advanced text generation' },
-            { name: 'Stable Diffusion', description: 'AI-powered image generation' },
-            { name: 'BERT', description: 'NLP tasks like Q&A' },
-            { name: 'DALL-E', description: 'Art generation using AI' },
-        ]);
+        console.log(projects);
+
     };
 
     const handleProjectClick = (projectId) => {

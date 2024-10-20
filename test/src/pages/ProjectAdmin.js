@@ -8,6 +8,8 @@ import { readContract, prepareContractCall } from 'thirdweb';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { contract } from '../thirdwebInfra';
+import BigNumber from 'bignumber.js';
+
 
 function ProjectAdmin() {
     const { projectId, projectTitle } = useParams(); // Extract project ID and title from URL params
@@ -18,6 +20,8 @@ function ProjectAdmin() {
 
     const [project, setProject] = useState(null); // Store project details
     const [loading, setLoading] = useState(true); // Loading state
+
+    const [amountInput, setAmountInput] = useState('');
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
@@ -50,24 +54,41 @@ function ProjectAdmin() {
     }, [projectId]);
 
     const handleFundProject = async () => {
-        try {
-            const transaction = prepareContractCall({
-                contract,
-                method: 'function deposit(uint256 _projectId) payable',
-                params: [projectId],
-            });
-            sendTransaction(transaction, {
-                onSuccess: () => {
-                    toast.success('Project funded successfully!');
-                },
-                onError: (error) => {
-                    console.error('Funding failed:', error);
-                    toast.error('Funding failed. Please try again.');
-                },
-            });
-        } catch (error) {
-            console.error('Error preparing transaction:', error);
+        console.log("amountInput", amountInput);
+
+        // Ensure amountInput is treated as a string
+        const amount = new BigNumber(amountInput);
+
+        if (amount.isNaN() || amount.isLessThanOrEqualTo(0)) {
+            toast.error('Invalid amount');
+            return;
         }
+
+        // Convert amount to wei (multiply by 10^18)
+        const amountInWei = amount.times(new BigNumber(10).pow(18));
+
+        console.log("Amount in Wei:", amountInWei.toString(10));
+
+        const transaction = prepareContractCall({
+            contract,
+            method: 'function deposit(uint256 _projectId) payable',
+            params: [projectId],
+            value: amountInWei.toString(10), // Convert to string in base 10
+        });
+
+        // Log the transaction details
+        console.log("Transaction:", transaction);
+
+        sendTransaction(transaction, {
+            onSuccess: () => {
+                toast.success('Project funded successfully!');
+                setAmountInput('');
+            },
+            onError: (error) => {
+                console.error('Funding failed:', error);
+                toast.error('Funding failed. Please try again.');
+            },
+        });
     };
 
     if (loading) {
@@ -92,8 +113,19 @@ function ProjectAdmin() {
                     <strong>Bounty Pool:</strong> {project.bountyPool} ETH
                 </p>
                 <p className="text-gray-700 mb-4">
-                    <strong>Feedback:</strong> {project.feedback || 'No feedback available yet.'}
+
                 </p>
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Amount (ETH)</label>
+                    <input
+                        type="number"
+                        value={amountInput}
+                        onChange={(e) => setAmountInput(e.target.value)}
+                        required
+                        className="mt-2 block w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+                    />
+                </div>
 
                 <button
                     onClick={handleFundProject}

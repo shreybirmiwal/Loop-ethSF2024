@@ -34,7 +34,10 @@ def inference(model: int, prompt: str):
         completion = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are a licensed professional therapist who assists with emotional and mental health issues."},
+                {
+                    "role": "system",
+                    "content": "You are a licensed professional therapist who assists with emotional and mental health issues.",
+                },
                 {
                     "role": "user",
                     "content": "Write a haiku about recursion in programming.",
@@ -49,11 +52,34 @@ def inference(model: int, prompt: str):
 
         for message in client.chat_completion(
             model="mistralai/Mixtral-8x7B-Instruct-v0.1",
-            messages=[{"role": "user", "content": "You are a professional standup comedian who makes jokes about crypto and blockchain."}],
+            messages=[
+                {
+                    "role": "user",
+                    "content": "You are a professional standup comedian who makes jokes about crypto and blockchain.",
+                }
+            ],
             max_tokens=500,
             stream=True,
         ):
             print(message.choices[0].delta.content, end="")
+
+
+def inference_from_hf(model_name: str, prompt: str, url: str):
+    client = InferenceClient(api_key=os.getenv("HF_PAT"))
+
+    for message in client.chat_completion(
+        model=model_name,
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        max_tokens=500,
+        stream=True,
+    ):
+        print(message.choices[0].delta.content, end="")
+
 
 # 2) updating RLHF given human feedback
 # input: human feedback (Usefulness, Clarity Relevance) all frm - (0->10)

@@ -26,18 +26,21 @@ function ModelPage() {
         try {
             console.log("Sending API request...");
 
-            const response = await fetch(`${API_BASE_URL}/api/inference`, {
+            const response = await fetch(`${API_BASE_URL}/infer`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     model: modelName,
-                    prompt: inputMessage
+                    query: inputMessage
                 })
             });
 
             if (!response.ok) throw new Error(`Server responded with ${response.status}`);
 
+
             const data = await response.json();
+            console.log(data);
+
 
             setChatMessages((prevMessages) => [
                 ...prevMessages,

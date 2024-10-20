@@ -6,18 +6,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { client, contract, abi } from '../thirdwebInfra';
 import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
-import { useUser } from "@thirdweb-dev/react";
-import { useAddress } from "@thirdweb-dev/react";
+import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
 function ModelPage() {
     const { projectId, projectTitle } = useParams();
     const { mutate: sendTransaction } = useSendTransaction();
-    const { isLoggedIn, isLoading } = useUser();
-    const address = useAddress();
 
 
+    const account = useActiveAccount();
 
 
     const [chatMessages, setChatMessages] = useState([]);
@@ -96,7 +94,7 @@ function ModelPage() {
         const transaction = prepareContractCall({
             contract,
             method: "function reward(address _recipient, uint256 _projectId)",
-            params: [address, projectId]
+            params: [account?.address, projectId]
         });
         sendTransaction(transaction);
     };

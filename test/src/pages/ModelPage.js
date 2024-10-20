@@ -8,6 +8,9 @@ import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 
+import { db } from '../firebase';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
 function ModelPage() {
@@ -18,7 +21,7 @@ function ModelPage() {
 
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
-    const [feedback, setFeedback] = useState('');
+    const [feedbackVal, setFeedback] = useState('');
     const [feedbackPending, setFeedbackPending] = useState(false);
     const chatEndRef = useRef(null);
 
@@ -69,23 +72,56 @@ function ModelPage() {
         }
     };
 
+    const handleUpdateIPFS = async (selectedFeedback) => {
+        console.log("Updating IPFS");
+
+        // Get the latest query and response from chatMessages
+        const query = chatMessages[chatMessages.length - 2]?.text;
+        const response = chatMessages[chatMessages.length - 1]?.text;
+
+        console.log('Query:', query);
+        console.log('Response:', response);
+        console.log('Feedback:', selectedFeedback);  // Use the passed parameter
+
+        try {
+            // Reference the specific document in the 'data' collection
+            const docRef = doc(db, 'data', projectId);
+
+            // Create the new entry to append
+            const newEntry = {
+                query,
+                response,
+                feedback: selectedFeedback,  // Use the passed parameter
+            };
+
+            // Append the new entry to the existing 'data' array using arrayUnion
+            await updateDoc(docRef, {
+                data: arrayUnion(newEntry),
+            });
+
+            console.log('New entry successfully added!');
+        } catch (error) {
+            console.error('Error appending data:', error);
+        }
+    };
+
 
     const handleFeedbackSelection = (selectedFeedback) => {
-        setFeedback(selectedFeedback);
+        setFeedback(selectedFeedback);  // This will still update the state
         toast.success(`Feedback submitted: ${selectedFeedback}`, { position: 'top-right', theme: 'light' });
 
-        //send feedback to server
-        console.log("SEND THIS STUFF TO THE WALRUS DB")
+        console.log("SEND THIS STUFF TO THE WALRUS DB");
         console.log('Feedback:', selectedFeedback);
-        console.log('query:', chatMessages[chatMessages.length - 2].text);
-        console.log('response:', chatMessages[chatMessages.length - 1].text);
-        console.log("GIVE USER THE MONEY")
-
+        console.log('Query:', chatMessages[chatMessages.length - 2]?.text);
+        console.log('Response:', chatMessages[chatMessages.length - 1]?.text);
+        console.log("GIVE USER THE MONEY");
 
         setFeedbackPending(false);
 
+        handleUpdateIPFS(selectedFeedback);
         handlePayments();
     };
+
     //user needs to be payed out here
 
     const handlePayments = async () => {

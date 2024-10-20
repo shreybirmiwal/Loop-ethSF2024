@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { pinata } from '../utils/config';
 
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -31,24 +30,26 @@ function UploadModelPage() {
             console.log("Form submission started");
             console.log({ title, description, hfLink, bounty });
 
-            // IPFS upload
-            console.log("Starting IPFS upload");
-            const randomId = Math.floor(Math.random() * 1000000);
-            const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
 
-            console.log("Uploading to Pinata");
-            const upload = await pinata.upload.file(blankFile);
-            const ipfsLink = upload.IpfsHash;
-            console.log(`IPFS Link: ${ipfsLink}`);
+            // no longer uploda to pinatat
+            // // IPFS upload
+            // console.log("Starting IPFS upload");
+            // const randomId = Math.floor(Math.random() * 1000000);
+            // const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
+
+            // console.log("Uploading to Pinata");
+            // const upload = await pinata.upload.file(blankFile);
+            // const ipfsLink = upload.IpfsHash;
+            // console.log(`IPFS Link: ${ipfsLink}`);
 
 
 
-            //get the id of the new project
-            const projects = await readContract({
-                contract,
-                method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
-                params: []
-            })
+            // //get the id of the new project
+            // const projects = await readContract({
+            //     contract,
+            //     method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+            //     params: []
+            // })
 
 
 
@@ -57,7 +58,9 @@ function UploadModelPage() {
             const transaction = prepareContractCall({
                 contract,
                 method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-                params: [title, description, toWei(bounty), ipfsLink]
+                // params: [title, description, toWei(bounty), ipfsLink]
+                params: [title, description, toWei(bounty), "YEE"]
+
             });
             console.log("Transaction prepared:", transaction);
 

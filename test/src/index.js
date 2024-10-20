@@ -15,6 +15,7 @@ root.render(
 
     <ThirdwebProvider
       clientId="054f29c5673f6dd2f9955c0e3a447113"
+      defaultChainId={48899}
     >
       <App />
     </ThirdwebProvider>

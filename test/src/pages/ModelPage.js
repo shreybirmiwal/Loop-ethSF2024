@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Web3 from 'web3';
 
 import { abi } from './abi.js'
+import { mode } from 'viem/chains';
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
@@ -84,9 +85,41 @@ function ModelPage() {
     };
     //user needs to be payed out here
 
-    const handlePayments = () => {
+    const handlePayments = async () => {
+        try {
+            // Ensure MetaMask is connected
+            if (typeof window.ethereum !== 'undefined') {
+                // Request account access if needed
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-    }
+                // Get the user's address
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                const userAddress = accounts[0];
+                console.log("User address:", userAddress);
+
+                // Get the project id
+                const projectId = modelName;
+
+                // Prepare the transaction
+                const tx = contractCode.methods.reward(userAddress, projectId);
+
+                // Estimate gas
+                const gas = await tx.estimateGas({ from: userAddress });
+
+                // Send the transaction
+                const receipt = await tx.send({
+                    from: userAddress,
+                    gas: gas
+                });
+
+                console.log("Transaction receipt:", receipt);
+            } else {
+                console.log("Please install MetaMask!");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    };
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">

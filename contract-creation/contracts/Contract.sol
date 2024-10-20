@@ -2,7 +2,6 @@
 pragma solidity ^0.8.9;
 
 
-
 contract Flex {
     struct Project {
         uint256 id;
@@ -21,13 +20,12 @@ contract Flex {
         uint256 _bounty,
         string memory _feedbackURI
     ) public {
-        uint256 _refactoredBounty = _bounty * 1 ether;
         // create a new project
         Project memory project = Project(
             projects.length,
             _title,
             _description,
-            _refactoredBounty,
+            _bounty,
             0,
             _feedbackURI
         );

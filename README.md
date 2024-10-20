@@ -49,7 +49,7 @@ Address: [0xba30D3b9F488554696814F19C5Be18e7668E67e3](https://)
 Address: [0xe9113ab129cE12cF7cc50A5D65cfA34FEC4746ed]()
 
 ### Hedera
-Address: []()
+Address: [0x813722E1244b608a8d60fD5090C68bF6Ac12b602]()
 
 ## Rootstock:
 

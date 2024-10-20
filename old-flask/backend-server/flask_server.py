@@ -1,8 +1,7 @@
-# BASE URL: https://shreybirmiwal.pythonanywhere.com/
 from dotenv import load_dotenv
-from flask import Flask
 from flask_cors import CORS  # Import CORS
-from flask import jsonify
+from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 from openai import OpenAI
 import os
 from huggingface_hub import InferenceClient
@@ -12,24 +11,41 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# @app.route('/')
-# def hello():
-#     return 'Hello, World!'
 
 
-@app.route("/api/hello")
-def hello_api():
-    return jsonify({"hello": "world"})
+@app.route('/test', methods=['POST'])
+def get_second_string():
+    # Get the JSON data from the request body
+    data = request.get_json()
+
+    # Extract the two strings from the JSON payload
+    string1 = data.get('string1', '')
+    string2 = data.get('string2', '')
+
+    print(string1)
+    print(string2)
+
+    # Return the second string in JSON format
+    return jsonify({"second_string": string2}), 200
 
 
-# 1) quereying these models and getting the answers frm the model
-# input: model name
-# input: prompt
-# output: model output
-@app.route("/api/inference/<model>/<prompt>")
-def inference(model: int, prompt: str):
-    if model == 0:
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+@app.route("/infer", methods=['POST'])
+def inference():
+
+    data = request.get_json()
+
+    # Extract the two strings from the JSON payload
+    model = data.get('model', '')
+    query = data.get('query', '')
+
+    print(model)
+    print(query)
+
+
+
+    if model == '0':
+        client = OpenAI(api_key="sk-proj---8bU8Sc-BLAH")
 
         completion = client.chat.completions.create(
             model="gpt-4o",
@@ -40,61 +56,39 @@ def inference(model: int, prompt: str):
                 },
                 {
                     "role": "user",
-                    "content": "Write a haiku about recursion in programming.",
+                    "content": query,
                 },
             ],
         )
 
-        return completion.choices[0].message.content
+        return jsonify({"res": completion.choices[0].message.content})
 
-    if model == 1:
-        client = InferenceClient(api_key=os.getenv("HF_PAT"))
+    if model == "therapygpt":
+        client = OpenAI(api_key="sk-proj---8bU8Sc-BLAH")
 
-        for message in client.chat_completion(
-            model="mistralai/Mixtral-8x7B-Instruct-v0.1",
+        completion = client.chat.completions.create(
+            model="gpt-4o",
             messages=[
                 {
+                    "role": "system",
+                    "content": "You are a licensed professional therapist who assists with emotional and mental health issues.",
+                },
+                {
                     "role": "user",
-                    "content": "You are a professional standup comedian who makes jokes about crypto and blockchain.",
-                }
+                    "content": query,
+                },
             ],
-            max_tokens=500,
-            stream=True,
-        ):
-            print(message.choices[0].delta.content, end="")
+        )
 
+        return jsonify({"res": completion.choices[0].message.content})
 
-def inference_from_hf(model_name: str, system_prompt: str, user_prompt: str, url: str):
-    client = InferenceClient(api_key=os.getenv("HF_PAT"))
-
-    for message in client.chat_completion(
-        model=model_name,
-        messages=[
-            {
-                "role": "user",
-                "content": f"{system_prompt} + {user_prompt}",
-            }
-        ],
-        max_tokens=500,
-        stream=True,
-    ):
-        print(message.choices[0].delta.content, end="")
-
-
-# 2) updating RLHF given human feedback
-# input: human feedback (Usefulness, Clarity Relevance) all frm - (0->10)
-# output: new model weights
-@app.route("/api/feedback/<model>/<prompt>/<response>/<feedback>")
-def feedback(model, prompt, response, feedback):
-    # update the model weights
-
-    # update firebase
-
-    return jsonify(
-        {model: model, prompt: prompt, response: response, feedback: feedback}
-    )
-
-
+    else:
+        client = InferenceClient(
+            model,
+            token="BLAH",
+        )
+        out =  client.text_generation(query)
+        return jsonify({"res": out})  
 
 
 

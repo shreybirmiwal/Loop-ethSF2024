@@ -31,17 +31,10 @@ function UploadModelPage() {
         console.log({ title, description, hfLink, bounty });
 
         //ipfs upload
-        //get all projects
-        const projects = await readContract({
-            contract,
-            method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
-            params: []
-        })
+        //ranom numbre
+        const randomId = Math.floor(Math.random() * 1000000);
 
-
-        //next project id = project length current
-        const nextProjectId = projects.length;
-        const blankFile = new File([""], `${nextProjectId}.txt`, { type: "text/plain" });
+        const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
         const upload = await pinata.upload.file(blankFile);
         const ipfsLink = upload.IpfsHash;
         console.log(`IPFS Link: ${ipfsLink}`);
@@ -55,13 +48,10 @@ function UploadModelPage() {
         });
         sendTransaction(transaction);
 
-
-        //once transacted, redirect to the admin page
-        navigate('/admin/' + nextProjectId + '/' + title);
+        //console.log("/admin/" + nextProjectId + "/" + title);
 
 
         toast.success('Model uploaded successfully!', { theme: 'light' });
-        navigate('/models'); // Redirect after success
     };
 
     return (

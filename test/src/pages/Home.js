@@ -34,7 +34,10 @@ function Home() {
     };
 
     const handleProjectClick = (projectId, projectTitle) => {
-        navigate(`/project/${projectId}/${projectTitle}`);
+        var projectTitle2 = projectTitle.replace("/", "_");
+
+
+        navigate(`/project/${projectId}/${projectTitle2}`);
     };
 
     return (

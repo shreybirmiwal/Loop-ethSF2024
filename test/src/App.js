@@ -5,6 +5,7 @@ import UploadModel from './pages/UploadModel';
 import ModelPage from './pages/ModelPage';
 import { ConnectButton } from "thirdweb/react";
 import { createThirdwebClient } from "thirdweb";
+import ProjectAdmin from './pages/ProjectAdmin';
 
 import { client } from './thirdwebInfra';
 
@@ -40,6 +41,9 @@ function App() {
             path="/project/:projectId/:projectTitle"
             element={<ModelPage />}
           />
+
+
+          <Route path="/admin/:projectId/:projectTitle" element={<ProjectAdmin />} />
 
 
         </Routes>

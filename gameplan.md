@@ -6,6 +6,7 @@ Hedera: EVM Starter Bounty ⸺ $3,000
 Hedera: Ecosystem Builder Bounty ⸺ $4,000
 Neon EVM: Develop a EVM-based application ⸺ $5,000 ($3,000 x 1, $1,500 x 1, $500 x 1)
 Rootstock: Best use of Rootstock Blockchain ⸺ $4,500
+Morph
 
 **TBD:**
 

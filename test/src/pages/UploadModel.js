@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 import { client, contract, abi } from '../thirdwebInfra';
 import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
+import { readContract } from 'thirdweb';
+import { toWei } from 'thirdweb';
 
 function UploadModelPage() {
     const navigate = useNavigate(); // Navigation for redirect
@@ -20,32 +22,62 @@ function UploadModelPage() {
     const [hfLink, setHfLink] = useState('');
     const [bounty, setBounty] = useState('');
 
-
-    const handleFormSubmit = (e) => {
+    var title2;
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-
-        // Handle submission logic here
-        console.log({ title, description, hfLink, bounty });
-
-
-        //generate ipfs link
+        try {
+            console.log("Form submission started");
+            console.log({ title, description, hfLink, bounty });
 
 
+            // no longer uploda to pinatat
+            // // IPFS upload
+            // console.log("Starting IPFS upload");
+            // const randomId = Math.floor(Math.random() * 1000000);
+            // const blankFile = new File(["placeholder"], `${randomId}.txt`, { type: "text/plain" });
 
-        // publish the model to the blockchain
-        const transaction = prepareContractCall({
-            contract,
-            method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-            params: [title, description, bounty, "randomuriTEST"]
-        });
-        sendTransaction(transaction);
+            // console.log("Uploading to Pinata");
+            // const upload = await pinata.upload.file(blankFile);
+            // const ipfsLink = upload.IpfsHash;
+            // console.log(`IPFS Link: ${ipfsLink}`);
 
 
 
-        toast.success('Model uploaded successfully!', { theme: 'light' });
-        navigate('/models'); // Redirect after success
-    };
+            // //get the id of the new project
+            // const projects = await readContract({
+            //     contract,
+            //     method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+            //     params: []
+            // })
+            title2 = title.replace(/ /g, "_");
+
+
+            // Prepare the blockchain transaction
+            console.log("Preparing blockchain transaction");
+            const transaction = prepareContractCall({
+                contract,
+                method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
+                // params: [title, description, toWei(bounty), ipfsLink]
+                params: [title2, description, toWei(bounty), "YEE"]
+
+            });
+            console.log("Transaction prepared:", transaction);
+
+            // Send the transaction
+            console.log("Sending transaction");
+            sendTransaction(transaction);
+            //console.log("Transaction result:", result);
+
+            toast.success('Model uploaded successfully!', { theme: 'light' });
+
+
+
+        } catch (error) {
+            console.error("Error in form submission:", error);
+            toast.error('Error uploading model: ' + error.message, { theme: 'light' });
+        }
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -57,6 +89,9 @@ function UploadModelPage() {
                     onSubmit={handleFormSubmit}
                     className="w-full max-w-2xl space-y-8 bg-white p-8 rounded-lg shadow-lg"
                 >
+
+                    <p> Once uploaded, check out your admin dashboard at: /project/$projectID/{title2}</p>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Model Title</label>
                         <input

@@ -41,6 +41,17 @@ function UploadModelPage() {
             const ipfsLink = upload.IpfsHash;
             console.log(`IPFS Link: ${ipfsLink}`);
 
+
+
+            //get the id of the new project
+            const projects = await readContract({
+                contract,
+                method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+                params: []
+            })
+
+
+
             // Prepare the blockchain transaction
             console.log("Preparing blockchain transaction");
             const transaction = prepareContractCall({
@@ -52,10 +63,13 @@ function UploadModelPage() {
 
             // Send the transaction
             console.log("Sending transaction");
-            const result = await sendTransaction(transaction);
-            console.log("Transaction result:", result);
+            sendTransaction(transaction);
+            //console.log("Transaction result:", result);
 
             toast.success('Model uploaded successfully!', { theme: 'light' });
+
+
+
         } catch (error) {
             console.error("Error in form submission:", error);
             toast.error('Error uploading model: ' + error.message, { theme: 'light' });
@@ -72,6 +86,9 @@ function UploadModelPage() {
                     onSubmit={handleFormSubmit}
                     className="w-full max-w-2xl space-y-8 bg-white p-8 rounded-lg shadow-lg"
                 >
+
+                    <p> Once uploaded, check out your admin dashboard at: /project/$projectID/{title}</p>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Model Title</label>
                         <input

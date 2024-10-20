@@ -9,16 +9,23 @@ We deployed our base smart contract on the testnet, which facilitates deposits (
 Sree Duggirala is a third-year Electrical and Computer Engineering (ECE) major at the University of Texas at Austin and Shrey Birmiwal is a senior at Westwood High School.
 
 **Clear instructions for testing the integration.**\
-1. Get OpenAI and HuggingFace API
-2. create virtual environment in Python
+1. Get OpenAI and HuggingFace API and add to .env
+2. python3 -m venv venv && source venv/bin/activate
 3. pip install -r requirements.txt
-4. cd web-app and npx start
+4. cd web-app and npx run start
 **Feedback describing your experience with building on Rootstock.**
 Deployment did not work with Foundry - was slightly difficult to use
 
 **Optionally, a short video demo or slide deck.**
 
+## Polygon Submission
+**Setup Instructions**
+1. Get OpenAI and HuggingFace API and add to .env
+2. python3 -m venv venv && source venv/bin/activate
+3. pip install -r requirements.txt
+4. cd web-app and npx run start
 
+**Architecture Diagram**
 
 
 ### Zircuit Testnet:

@@ -10,35 +10,26 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { contract } from '../thirdwebInfra';
 
-
-
-
 function ProjectAdmin() {
-    const { projectId, projectTitle } = useParams(); // Extract project ID and title from URL params
+    const { projectId } = useParams();
     const navigate = useNavigate();
     const account = useActiveAccount();
-
     const { mutate: sendTransaction } = useSendTransaction();
 
-    const [project, setProject] = useState(null); // Store project details
-    const [loading, setLoading] = useState(true); // Loading state
-
+    const [project, setProject] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [amountInput, setAmountInput] = useState('');
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
-                const projects = await readContract({
+                const projectData = await readContract({
                     contract,
-                    method: 'function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])',
-                    params: [],
+                    method: 'function getProject(uint256 _projectId) view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI))',
+                    params: [projectId],
                 });
 
-                console.log("all projects", projects);
-                console.log("looking for project with id", projectId);
-
-                const projectData = projects.find((p) => p.id.toString() === projectId);
-                console.log("found project", projectData);
+                console.log("Fetched project:", projectData);
 
                 if (projectData) {
                     const feedbackFile = await pinata.gateways.get(projectData.feedbackURI);
@@ -58,9 +49,6 @@ function ProjectAdmin() {
     const handleFundProject = async () => {
         console.log("amountInput", amountInput);
 
-
-
-
         const transaction = prepareContractCall({
             contract,
             method: 'function deposit(uint256 _projectId) payable',
@@ -68,7 +56,6 @@ function ProjectAdmin() {
             value: toWei(amountInput),
         });
 
-        // Log the transaction details
         console.log("Transaction:", transaction);
 
         sendTransaction(transaction, {
@@ -81,6 +68,12 @@ function ProjectAdmin() {
                 toast.error('Funding failed. Please try again.');
             },
         });
+    };
+
+    // Convert BigInt to ETH (number) for display
+    const formatWeiToEth = (wei) => {
+        return wei;
+        //return (BigInt(wei) / BigInt(1e18)).toString(); // Convert to string for rendering
     };
 
     if (loading) {
@@ -99,16 +92,22 @@ function ProjectAdmin() {
                     <strong>Description:</strong> {project.description}
                 </p>
                 <p className="text-gray-700 mb-2">
-                    <strong>Bounty:</strong> {project.bounty} ETH
+                    <strong>Bounty:</strong> {formatWeiToEth(project.bounty)} ETH
                 </p>
                 <p className="text-gray-700 mb-2">
-                    <strong>Bounty Pool:</strong> {project.bountyPool} ETH
-                </p>
-                <p className="text-gray-700 mb-4">
-
+                    <strong>Bounty Pool:</strong> {formatWeiToEth(project.bountyPool)} ETH
                 </p>
 
-                <div className="mb-4">
+                <a
+                    href={`https://gateway.pinata.cloud/ipfs/${project.feedbackURI}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-600 hover:underline"
+                >
+                    Download Feedback Data
+                </a>
+
+                <div className="mt-4">
                     <label className="block text-sm font-medium text-gray-700">Amount (ETH)</label>
                     <input
                         type="number"
@@ -121,7 +120,7 @@ function ProjectAdmin() {
 
                 <button
                     onClick={handleFundProject}
-                    className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition"
+                    className="w-full bg-green-500 text-white py-3 mt-4 rounded-lg hover:bg-green-600 transition"
                 >
                     Fund Project
                 </button>

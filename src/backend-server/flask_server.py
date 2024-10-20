@@ -1,10 +1,13 @@
 # BASE URL: https://shreybirmiwal.pythonanywhere.com/
-
+from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS  # Import CORS
 from flask import jsonify
 from openai import OpenAI
 import os
+from huggingface_hub import InferenceClient
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -24,23 +27,33 @@ def hello_api():
 # input: prompt
 # output: model output
 @app.route("/api/inference/<model>/<prompt>")
-def inference(model, prompt):
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+def inference(model: int, prompt: str):
+    if model == 0:
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-    completion = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {
-                "role": "user",
-                "content": "Write a haiku about recursion in programming.",
-            },
-        ],
-    )
+        completion = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are a licensed professional therapist who assists with emotional and mental health issues."},
+                {
+                    "role": "user",
+                    "content": "Write a haiku about recursion in programming.",
+                },
+            ],
+        )
 
-    return completion.choices[0].message.content
-    # return jsonify({'model': model, 'prompt': prompt, 'output': (f'OUTPUT OUTPOUT OUTPUT HEHE +'+model+"SAD"+prompt)})
+        return completion.choices[0].message.content
 
+    if model == 1:
+        client = InferenceClient(api_key=os.getenv("HF_PAT"))
+
+        for message in client.chat_completion(
+            model="mistralai/Mixtral-8x7B-Instruct-v0.1",
+            messages=[{"role": "user", "content": "You are a professional standup comedian who makes jokes about crypto and blockchain."}],
+            max_tokens=500,
+            stream=True,
+        ):
+            print(message.choices[0].delta.content, end="")
 
 # 2) updating RLHF given human feedback
 # input: human feedback (Usefulness, Clarity Relevance) all frm - (0->10)

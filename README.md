@@ -25,8 +25,10 @@ Deployment did not work with Foundry - was slightly difficult to use
 3. pip install -r requirements.txt
 4. cd web-app and npx run start
 
-**Architecture Diagram**
+**AI Model Used**
+The latest Llama 3.1 405B represents a significant breakthrough in artificial intelligence capabilities. With its expansive 128K token context window and support across eight languages, this model delivers exceptional performance across multiple domains. Its core strengths include comprehensive knowledge, mathematical reasoning, effective tool utilization, and advanced language translation - matching or exceeding proprietary AI systems currently available.
 
+A key innovation in Llama 3.1 is its enhanced approach to creating synthetic training data and streamlining model architecture, advancing the field of efficient AI systems. The release includes refined 8B and 70B versions, featuring improved logical processing and expanded applications from document analysis to polyglot conversations and software development assistance.
 
 ### Zircuit Testnet:
 

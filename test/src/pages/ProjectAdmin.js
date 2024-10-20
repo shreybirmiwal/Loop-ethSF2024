@@ -10,6 +10,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { contract } from '../thirdwebInfra';
 
+import { db } from '../firebase';
+import { collection, getDocs, updateDoc, doc, deleteDoc, addDoc } from 'firebase/firestore';
+
+
 function ProjectAdmin() {
     const { projectId } = useParams();
     const navigate = useNavigate();
@@ -19,10 +23,14 @@ function ProjectAdmin() {
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
     const [amountInput, setAmountInput] = useState('');
+    const [fire, setFire] = useState([]);
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
             try {
+                // Fetch the relevant Firebase document based on the projectId.
+                const firebaseData = await fetchFirebase(projectId);
+
                 const projectData = await readContract({
                     contract,
                     method: 'function getProject(uint256 _projectId) view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI))',
@@ -33,7 +41,7 @@ function ProjectAdmin() {
 
                 if (projectData) {
                     const feedbackFile = await pinata.gateways.get(projectData.feedbackURI);
-                    setProject({ ...projectData, feedback: feedbackFile });
+                    setProject({ ...projectData, feedback: feedbackFile, firebaseData });
                 }
                 setLoading(false);
             } catch (error) {
@@ -45,6 +53,25 @@ function ProjectAdmin() {
 
         fetchProjectDetails();
     }, [projectId]);
+
+    // Fetch a specific document from Firebase
+    const fetchFirebase = async (projectId) => {
+        try {
+            const docRef = doc(db, 'data', projectId); // Reference the specific document by ID
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                console.log("firebaseData:", docSnap.data());
+                return docSnap.data(); // Return the document data directly
+            } else {
+                console.log("No such document!");
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching Firebase data:', error);
+            throw error;
+        }
+    };
 
     const handleFundProject = async () => {
         console.log("amountInput", amountInput);

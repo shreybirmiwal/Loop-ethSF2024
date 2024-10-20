@@ -6,8 +6,9 @@ import ModelPage from './pages/ModelPage';
 import { ConnectButton } from "thirdweb/react";
 import { createThirdwebClient } from "thirdweb";
 
+import { client } from './thirdwebInfra';
+
 function App() {
-  const client = createThirdwebClient({ clientId: "054f29c5673f6dd2f9955c0e3a447113" });
 
 
   return (

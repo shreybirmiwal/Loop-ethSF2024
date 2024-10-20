@@ -1,14 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { abi } from './abi.js'
 import { useEffect, useState } from 'react';
+import { client, contract } from '../thirdwebInfra.js';
 
-
+import { readContract } from 'thirdweb';
 
 function Home() {
-    // const web3 = new Web3('https://rpc-amoy.polygon.technology/');
-    // const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
-
 
 
     const navigate = useNavigate();
@@ -23,10 +20,15 @@ function Home() {
     const fetchProjects = async () => {
 
 
-        const projects = await contractCode.methods.getProjects().call();
+        const projects = await readContract({
+            contract,
+            method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+            params: []
+        })
+
+        console.log(projects)
 
         setProjects(projects);
-
         console.log(projects);
 
     };

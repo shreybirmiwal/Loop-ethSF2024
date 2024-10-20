@@ -1,3 +1,19 @@
+import { createThirdwebClient, getContract, resolveMethod } from "thirdweb";
+import { defineChain } from "thirdweb/chains";
+import { ThirdwebProvider } from "thirdweb/react";
+
+export const client = createThirdwebClient({
+    clientId: "054f29c5673f6dd2f9955c0e3a447113"
+});
+
+
+export const contract = getContract({
+    client,
+    chain: defineChain(80002),
+    address: "0x7a722C4C585F17B237DD2C57dD46677c7D348420"
+});
+
+
 export const abi = [
     {
         "inputs": [

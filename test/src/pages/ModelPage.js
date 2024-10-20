@@ -5,9 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Web3 from 'web3';
 
-import { abi } from './abi.js'
-import { mode } from 'viem/chains';
-
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
 function ModelPage() {
@@ -22,8 +19,8 @@ function ModelPage() {
 
 
     //crypto stuff
-    const web3 = new Web3('https://rpc-amoy.polygon.technology/');
-    const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
+    // const web3 = new Web3('https://rpc-amoy.polygon.technology/');
+    // const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
 
 
     useEffect(() => {
@@ -86,39 +83,7 @@ function ModelPage() {
     //user needs to be payed out here
 
     const handlePayments = async () => {
-        try {
-            // Ensure MetaMask is connected
-            if (typeof window.ethereum !== 'undefined') {
-                // Request account access if needed
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-                // Get the user's address
-                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-                const userAddress = accounts[0];
-                console.log("User address:", userAddress);
-
-                // Get the project id
-                const projectId = modelName;
-
-                // Prepare the transaction
-                const tx = contractCode.methods.reward(userAddress, projectId);
-
-                // Estimate gas
-                const gas = await tx.estimateGas({ from: userAddress });
-
-                // Send the transaction
-                const receipt = await tx.send({
-                    from: userAddress,
-                    gas: gas
-                });
-
-                console.log("Transaction receipt:", receipt);
-            } else {
-                console.log("Please install MetaMask!");
-            }
-        } catch (error) {
-            console.error("An error occurred:", error);
-        }
     };
 
     return (

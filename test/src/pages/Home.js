@@ -33,8 +33,8 @@ function Home() {
 
     };
 
-    const handleProjectClick = (projectId) => {
-        navigate(`/project/${projectId}`);
+    const handleProjectClick = (projectId, projectTitle) => {
+        navigate(`/project/${projectId}/${projectTitle}`);
     };
 
     return (
@@ -55,7 +55,7 @@ function Home() {
                         <div
                             key={project.id}
                             className="p-6 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer"
-                            onClick={() => handleProjectClick(project.id)}
+                            onClick={() => handleProjectClick(project.id, project.title)}
                         >
                             <h3 className="text-xl font-semibold text-indigo-600 mb-2">{project.title}</h3>
                             <p className="text-gray-600 mb-2">{project.description}</p>

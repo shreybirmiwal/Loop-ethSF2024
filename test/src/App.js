@@ -37,7 +37,7 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* <Route path="/upload" element={<UploadModel />} />  */}
           <Route
-            path="/project/:modelName"
+            path="/project/:projectId/:projectTitle"
             element={<ModelPage />}
           />
 

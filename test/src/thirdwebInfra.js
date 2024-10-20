@@ -11,6 +11,17 @@ export const contract = getContract({
     client,
     chain: defineChain(80002),
     address: "0x7d39981DFfe0Ede1642B53e098983a4cAc76472a"
+
+
+    //zircuit
+    // chain: defineChain(48900),
+    // address: "0xba30D3b9F488554696814F19C5Be18e7668E67e3"
+
+
+    // chain: defineChain(245022926),
+    // address: "0x56B6893A61F9D3988B176f36f2C33bc910513495"
+
+
 });
 
 

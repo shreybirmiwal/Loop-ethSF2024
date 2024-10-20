@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { pinata } from '../utils/config';
 import { useSendTransaction, useActiveAccount } from 'thirdweb/react';
+import { toWei } from 'thirdweb';
 import { readContract, prepareContractCall } from 'thirdweb';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { contract } from '../thirdwebInfra';
-import BigNumber from 'bignumber.js';
+
+
 
 
 function ProjectAdmin() {
@@ -56,24 +58,14 @@ function ProjectAdmin() {
     const handleFundProject = async () => {
         console.log("amountInput", amountInput);
 
-        // Ensure amountInput is treated as a string
-        const amount = new BigNumber(amountInput);
 
-        if (amount.isNaN() || amount.isLessThanOrEqualTo(0)) {
-            toast.error('Invalid amount');
-            return;
-        }
 
-        // Convert amount to wei (multiply by 10^18)
-        const amountInWei = amount.times(new BigNumber(10).pow(18));
-
-        console.log("Amount in Wei:", amountInWei.toString(10));
 
         const transaction = prepareContractCall({
             contract,
             method: 'function deposit(uint256 _projectId) payable',
             params: [projectId],
-            value: amountInWei.toString(10), // Convert to string in base 10
+            value: toWei(amountInput),
         });
 
         // Log the transaction details

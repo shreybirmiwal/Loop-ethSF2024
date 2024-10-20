@@ -1,15 +1,11 @@
 import React from 'react';
-import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
-import { abi } from './abi.js'
 import { useEffect, useState } from 'react';
+import { client, contract } from '../thirdwebInfra.js';
 
-
+import { readContract } from 'thirdweb';
 
 function Home() {
-    const web3 = new Web3('https://polygon-amoy.infura.io/v3/21dacd2cd38d4327aea6c6a677249c8f');
-    const contractCode = new web3.eth.Contract(abi, "0xe9113ab129cE12cF7cc50A5D65cfA34FEC4746ed");
-
 
 
     const navigate = useNavigate();
@@ -19,22 +15,26 @@ function Home() {
         fetchProjects();
 
 
-
     }, []);
 
     const fetchProjects = async () => {
 
 
-        const projects = await contractCode.methods.getProjects().call();
+        const projects = await readContract({
+            contract,
+            method: "function getProjects() view returns ((uint256 id, string title, string description, uint256 bounty, uint256 bountyPool, string feedbackURI)[])",
+            params: []
+        })
+
+        console.log(projects)
 
         setProjects(projects);
-
         console.log(projects);
 
     };
 
-    const handleProjectClick = (projectId) => {
-        navigate(`/project/${projectId}`);
+    const handleProjectClick = (projectId, projectTitle) => {
+        navigate(`/project/${projectId}/${projectTitle}`);
     };
 
     return (
@@ -55,7 +55,7 @@ function Home() {
                         <div
                             key={project.id}
                             className="p-6 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer"
-                            onClick={() => handleProjectClick(project.id)}
+                            onClick={() => handleProjectClick(project.id, project.title)}
                         >
                             <h3 className="text-xl font-semibold text-indigo-600 mb-2">{project.title}</h3>
                             <p className="text-gray-600 mb-2">{project.description}</p>

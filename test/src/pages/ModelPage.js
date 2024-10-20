@@ -3,11 +3,17 @@ import { useParams } from 'react-router-dom';
 import { FiSend } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { client, contract, abi } from '../thirdwebInfra';
+import { prepareContractCall } from "thirdweb"
+import { useSendTransaction } from "thirdweb/react";
+import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
 function ModelPage() {
-    const { modelName } = useParams();
+    const { projectId, projectTitle } = useParams();
+    const { mutate: sendTransaction } = useSendTransaction();
+    const account = useActiveAccount();
 
 
     const [chatMessages, setChatMessages] = useState([]);
@@ -15,6 +21,13 @@ function ModelPage() {
     const [feedback, setFeedback] = useState('');
     const [feedbackPending, setFeedbackPending] = useState(false);
     const chatEndRef = useRef(null);
+
+
+    //crypto stuff
+    // const web3 = new Web3('https://rpc-amoy.polygon.technology/');
+    // const contractCode = new web3.eth.Contract(abi, "0x7a722C4C585F17B237DD2C57dD46677c7D348420");
+
+
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -30,7 +43,7 @@ function ModelPage() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: modelName,
+                    model: projectId,
                     query: inputMessage
                 })
             });
@@ -70,13 +83,27 @@ function ModelPage() {
 
 
         setFeedbackPending(false);
+
+        handlePayments();
+    };
+    //user needs to be payed out here
+
+    const handlePayments = async () => {
+        const transaction = prepareContractCall({
+            contract,
+            method: "function reward(address _recipient, uint256 _projectId)",
+            params: [account?.address, projectId]
+        });
+        sendTransaction(transaction);
     };
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-800">{modelName}</h2>
+                <h2 className="text-xl font-semibold text-gray-800">{projectTitle}</h2>
             </div>
+
+            { }
 
             <div className="flex-grow bg-white border rounded-lg shadow-md p-6 overflow-y-auto">
                 {chatMessages.map((msg, index) => (

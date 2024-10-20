@@ -7,7 +7,9 @@ import { client, contract, abi } from '../thirdwebInfra';
 import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
-import { pinata } from '../utils/config';
+
+import { db } from '../firebase';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 const API_BASE_URL = "https://shreybirmiwal.pythonanywhere.com"; // Flask server for model response
 
@@ -19,7 +21,7 @@ function ModelPage() {
 
     const [chatMessages, setChatMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
-    const [feedback, setFeedback] = useState('');
+    const [feedbackVal, setFeedback] = useState('');
     const [feedbackPending, setFeedbackPending] = useState(false);
     const chatEndRef = useRef(null);
 
@@ -70,65 +72,56 @@ function ModelPage() {
         }
     };
 
-    const handleUpdateIPFS = async () => {
+    const handleUpdateIPFS = async (selectedFeedback) => {
         console.log("Updating IPFS");
 
-        // Print data (query, response, feedback)
-        const query = chatMessages[chatMessages.length - 2].text;
-        const response = chatMessages[chatMessages.length - 1].text;
+        // Get the latest query and response from chatMessages
+        const query = chatMessages[chatMessages.length - 2]?.text;
+        const response = chatMessages[chatMessages.length - 1]?.text;
 
-        console.log('query:', query);
-        console.log('response:', response);
-        console.log('feedback:', feedback);
+        console.log('Query:', query);
+        console.log('Response:', response);
+        console.log('Feedback:', selectedFeedback);  // Use the passed parameter
 
         try {
-            // Fetch current JSON data from IPFS
-            const response = await fetch("https://gateway.pinata.cloud/ipfs/QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH");
-            const data = await response.json();
+            // Reference the specific document in the 'data' collection
+            const docRef = doc(db, 'data', projectId);
 
-
-            // Structure the new entry
+            // Create the new entry to append
             const newEntry = {
-                query: query,
-                response: response,
-                feedback: feedback
+                query,
+                response,
+                feedback: selectedFeedback,  // Use the passed parameter
             };
 
-            // Update the JSON data with the new entry under a new project ID
-            data[projectId] = newEntry;
+            // Append the new entry to the existing 'data' array using arrayUnion
+            await updateDoc(docRef, {
+                data: arrayUnion(newEntry),
+            });
 
-            console.log("Updated data:", data);
-
-            // Upload the updated JSON data to IPFS (via Pinata API or another IPFS client)
-            const updatedData = JSON.stringify(data);
-
-            const res = await pinata.pinJSONToIPFS(updatedData);
-            console.log("Updated IPFS hash:", res.IpfsHash);
-
+            console.log('New entry successfully added!');
         } catch (error) {
-            console.error("Error updating IPFS:", error);
+            console.error('Error appending data:', error);
         }
     };
 
 
     const handleFeedbackSelection = (selectedFeedback) => {
-        setFeedback(selectedFeedback);
+        setFeedback(selectedFeedback);  // This will still update the state
         toast.success(`Feedback submitted: ${selectedFeedback}`, { position: 'top-right', theme: 'light' });
 
-        //send feedback to server
-        console.log("SEND THIS STUFF TO THE WALRUS DB")
+        console.log("SEND THIS STUFF TO THE WALRUS DB");
         console.log('Feedback:', selectedFeedback);
-        console.log('query:', chatMessages[chatMessages.length - 2].text);
-        console.log('response:', chatMessages[chatMessages.length - 1].text);
-        console.log("GIVE USER THE MONEY")
-
+        console.log('Query:', chatMessages[chatMessages.length - 2]?.text);
+        console.log('Response:', chatMessages[chatMessages.length - 1]?.text);
+        console.log("GIVE USER THE MONEY");
 
         setFeedbackPending(false);
 
+        handleUpdateIPFS(selectedFeedback);
         handlePayments();
-
-        handleUpdateIPFS();
     };
+
     //user needs to be payed out here
 
     const handlePayments = async () => {

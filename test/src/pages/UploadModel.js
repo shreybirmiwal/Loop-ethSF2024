@@ -10,6 +10,7 @@ import { prepareContractCall } from "thirdweb"
 import { useSendTransaction } from "thirdweb/react";
 import { useActiveAccount, useWalletBalance } from "thirdweb/react";
 import { readContract } from 'thirdweb';
+import { toWei } from 'thirdweb';
 
 function UploadModelPage() {
     const navigate = useNavigate(); // Navigation for redirect
@@ -45,7 +46,7 @@ function UploadModelPage() {
             const transaction = prepareContractCall({
                 contract,
                 method: "function createProject(string _title, string _description, uint256 _bounty, string _feedbackURI)",
-                params: [title, description, bounty, ipfsLink]
+                params: [title, description, toWei(bounty), ipfsLink]
             });
             console.log("Transaction prepared:", transaction);
 

@@ -10,13 +10,10 @@ Built during EthSF 2024
 Loop brings Reinforcement Learning with Human Feedback (RLHF) into the blockchain space and makes the human feedback crowdsourced. This platform integrates on-chain reward systems, empowering users to train AI models and earn rewards for quality feedback.
 
 
-### How does it work?
 
-![L p](https://github.com/user-attachments/assets/1dd32173-55c5-446d-ad62-b49930ca532a)
+https://github.com/user-attachments/assets/ac48148e-d346-4aa2-bf6a-b35fd364c22f
 
-1. UserA can upload any opensource model from huggingface. They pay chain-native tokens and set a bounty reward amount.
-2. UserB can access LLMs uploaded by other users (like user A) and use them for free. After each LLM output, UserB is prompted to give feedback (too short, too long, was responsive, bad output..). For helping give feedback, users earn crypto tokens deposited to account.
-3. UserA can access the admin dashboard and then see all of the data coming from the crowdsourced RLHF. This data can be used to retrain the model and update the weights.
+
 
 
 ### What is Reinforcement Learning with Human Feedback (RLHF)
@@ -28,14 +25,22 @@ RLHF is a machine learning approach that uses human feedback to 'guide' the lear
 Inherently, RLHF REQUIRES humans. This is because the feedback needs to be not objective. For example, if we were making a FunnyGPT, we could use RLHF to score the 'funniness' of llm outputs.
 
 
-So, RLHF requires human feedback and judgement to steer AI learning by rewarding good outputs and giving penalties to bad outputs.
+So, RLHF requires human feedback and judgment to steer AI learning by rewarding good outputs and penalizing bad outputs.
 
 ### Why is blockchain key for RLHF?
-1. Crypto Incentives: With blockchain, we can easily mobilize a large crowd of people with token incentives. Also, this brings more diversity in the perspectives because anyone (decentralized) can access, give feedback, and earn tokens. This is opposite to current approach of a company doing RLHF on their own model.
+1. Crypto Incentives: With blockchain, we can easily mobilize a large crowd of people with token incentives. Also, this brings more diversity in the perspectives because anyone (decentralized) can access, give feedback, and earn tokens. This is opposite to a company's current approach of doing RLHF on their own model.
 
 
-2. Privacy + Security: Blockchain makes it possible to compute on encrypted data using advanced techniques like homomorphic encryption or zero-knowledge proofs, allowing AI models to be trained without exposing sensitive user data. In future developments, we hope to integrate privacy-preserving blockchains will allow RLHF systems to keep data confidential while still benefiting from human feedback. This will allow us to use RLHF with privacy compliance in various industries like healthcare or finance. (Future works)
+2. Privacy + Security: Blockchain makes it possible to compute on encrypted data using advanced techniques like homomorphic encryption or zero-knowledge proofs, allowing AI models to be trained without exposing sensitive user data. In future developments, we hope to integrate privacy-preserving blockchains that will allow RLHF systems to keep data confidential while still benefiting from human feedback. This will allow us to use RLHF with privacy compliance in various industries like healthcare or finance. (Future works)
 
+
+### How does it work?
+
+![L p](https://github.com/user-attachments/assets/1dd32173-55c5-446d-ad62-b49930ca532a)
+
+1. UserA can upload any opensource model from huggingface. They pay chain-native tokens and set a bounty reward amount.
+2. UserB can access LLMs uploaded by other users (like user A) and use them for free. After each LLM output, UserB is prompted to give feedback (too short, too long, was responsive, bad output..). For helping give feedback, users earn crypto tokens deposited to account.
+3. UserA can access the admin dashboard and then see all of the data coming from the crowdsourced RLHF. This data can be used to retrain the model and update the weights.
 
 
 ## Installation

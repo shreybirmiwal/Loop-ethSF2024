@@ -85,7 +85,7 @@ def inference():
     else:
         client = InferenceClient(
             model,
-            token="BLAH",
+            token="BLAH", #replace with API token from huggingface
         )
         out =  client.text_generation(query)
         return jsonify({"res": out})  

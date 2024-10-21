@@ -3,23 +3,25 @@
 
 
 # Loop - Onchain RLHF Platform
-🏆 Built during EthSF 2024 | $1,500 Prize Winner (Hedera Track)
+Built during EthSF 2024
+🏆 $1,500 Hedera Prize + 🏆 $1,500 AirDAO AI prize, 
 
 
 Loop brings Reinforcement Learning with Human Feedback (RLHF) into the blockchain space and makes the human feedback crowdsourced. This platform integrates on-chain reward systems, empowering users to train AI models and earn rewards for quality feedback.
 
 
 ### How does it work?
+
+![L p](https://github.com/user-attachments/assets/1dd32173-55c5-446d-ad62-b49930ca532a)
+
 1. UserA can upload any opensource model from huggingface. They pay chain-native tokens and set a bounty reward amount.
 2. UserB can access LLMs uploaded by other users (like user A) and use them for free. After each LLM output, UserB is prompted to give feedback (too short, too long, was responsive, bad output..). For helping give feedback, users earn crypto tokens deposited to account.
 3. UserA can access the admin dashboard and then see all of the data coming from the crowdsourced RLHF. This data can be used to retrain the model and update the weights.
 
 
-
 ### What is Reinforcement Learning with Human Feedback (RLHF)
 
-RLHF is a machine learning approach that uses human feedback to 'guide' the learning of AI models.
-Whenever ChatGPT asks you to pick between 2 split-screen answer options, that is an example of RLHF. It is injecting your human feedback to improve the model weights and thus fine tune the model.
+RLHF is a machine learning approach that uses human feedback to 'guide' the learning of AI models. Whenever ChatGPT asks you to pick between 2 split-screen answer options, that is an example of RLHF. It is injecting your human feedback to improve the model weights and thus fine tune the model.
 
 
 
